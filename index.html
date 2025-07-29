@@ -1,10 +1,210 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <title>Jesús Quijada</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jesús Quijada · Proyectos Neon</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --color-azul: #3b82f6;
+      --color-rojo: #ef4444;
+      --neon-brillo: rgba(255, 255, 255, 0.2);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: white;
+      color: #111;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #000;
+        color: #eee;
+      }
+    }
+
+    .banner {
+      position: relative;
+      height: 300px;
+      overflow: hidden;
+    }
+
+    .banner-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.8);
+    }
+
+    .logo-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      backdrop-filter: blur(15px);
+      border-radius: 15px;
+      padding: 10px;
+    }
+
+    .logo-img {
+      width: 120px;
+      border-radius: 50%;
+      box-shadow: 0 0 30px var(--color-azul);
+    }
+
+    main {
+      padding: 20px;
+      max-width: 960px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2rem;
+      color: var(--color-azul);
+      text-shadow: 0 0 5px var(--color-azul);
+    }
+
+    .repo-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin: 15px 0;
+      padding: 20px;
+      box-shadow: 0 0 10px var(--neon-brillo);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease;
+    }
+
+    .repo-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px var(--color-rojo);
+    }
+
+    .repo-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.5rem;
+      color: var(--color-rojo);
+      text-shadow: 0 0 4px var(--color-rojo);
+    }
+
+    .repo-card p {
+      margin: 0 0 10px;
+      line-height: 1.6;
+    }
+
+    .repo-links {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .repo-links a {
+      background: var(--color-azul);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 10px var(--color-azul);
+      transition: background 0.3s ease;
+    }
+
+    .repo-links a:hover {
+      background: var(--color-rojo);
+      box-shadow: 0 0 10px var(--color-rojo);
+    }
+
+    .footer-dark {
+      background: #111;
+      color: #eee;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 0 20px var(--color-rojo);
+    }
+
+    .github-links {
+      margin-bottom: 20px;
+    }
+
+    .github-links a {
+      color: var(--color-azul);
+      margin: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .github-links a:hover {
+      color: var(--color-rojo);
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-  <h1>Bienvenido al sitio de Jesús Quijada</h1>
-  <p>Diseñador de ecosistemas visuales · Creador de Influent OS · Gabo Al vive aquí.</p>
+
+  <!-- Banner y logo -->
+  <header class="banner">
+    <img src="assets/banner.jpg" alt="Banner" class="banner-img"/>
+    <div class="logo-container">
+      <img src="assets/logo.jpg" alt="Logo de Jesús" class="logo-img"/>
+    </div>
+  </header>
+
+  <!-- Repositorios y documentación -->
+  <main>
+    <h2>Documentación de Proyectos</h2>
+
+    <div class="repo-card">
+      <h3>Influent OS</h3>
+      <p>Sistema visual revolucionario con ecosistema modular. Automatiza y transforma...</p>
+      <div class="repo-links">
+        <a href="https://github.com/jesusquijada34/InfluentOS" target="_blank">GitHub</a>
+        <a href="https://influentos.github.io/" target="_blank">Live Web</a>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <h3>Package Maker</h3>
+      <p>Herramienta profesional para generar paquetes multiplataforma con estética visual...</p>
+      <div class="repo-links">
+        <a href="https://github.com/jesusquijada34/PackageMaker" target="_blank">GitHub</a>
+        <a href="https://packagemaker.github.io/" target="_blank">Live Web</a>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <h3>FlurryOS</h3>
+      <p>OS con diseño enfocado en contraste y tipografía, ideal para creadores visuales...</p>
+      <div class="repo-links">
+        <a href="https://github.com/jesusquijada34/FlurryOS" target="_blank">GitHub</a>
+        <a href="https://flurryos.github.io/" target="_blank">Live Web</a>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <h3>IPM Terminal</h3>
+      <p>CLI multiplataforma con emojis, colores adaptativos y rendimiento ligero...</p>
+      <div class="repo-links">
+        <a href="https://github.com/jesusquijada34/IPM-Terminal" target="_blank">GitHub</a>
+        <a href="https://ipmterminal.github.io/" target="_blank">Live Web</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Sección negra con enlaces -->
+  <footer class="footer-dark">
+    <div class="github-links">
+      <a href="https://github.com/jesusquijada34" target="_blank">Perfil GitHub</a>
+      <a href="https://jesusquijada34.github.io" target="_blank">Web Principal</a>
+    </div>
+    <p>© 2025 · Hecho por Jesús Quijada con estilo neon y pasión visual 🔥</p>
+  </footer>
+
 </body>
 </html>
