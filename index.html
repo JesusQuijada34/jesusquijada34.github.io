@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jesús Quijada · Proyectos Top</title>
+  <title>Jesús Quijada · Ecosistemas Visuales</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
       color-scheme: light dark;
-      --color-azul: #3b82f6;
-      --color-rojo: #ef4444;
-      --neon-brillo: rgba(255, 255, 255, 0.2);
+      --azul: #3b82f6;
+      --rojo: #ef4444;
+      --neon-blur: rgba(255, 255, 255, 0.15);
     }
 
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Poppins', Arial, sans-serif;
       background-color: white;
       color: #111;
       transition: background 0.4s ease, color 0.4s ease;
@@ -29,7 +30,7 @@
 
     .banner {
       position: relative;
-      height: 300px;
+      height: 380px;
       overflow: hidden;
     }
 
@@ -37,7 +38,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: brightness(0.8);
+      filter: brightness(0.75);
     }
 
     .logo-container {
@@ -51,97 +52,112 @@
     }
 
     .logo-img {
-      width: 120px;
+      width: 140px;
       border-radius: 50%;
-      box-shadow: 0 0 30px var(--color-azul);
+      box-shadow: 0 0 25px var(--azul);
+    }
+
+    .btn-seguir {
+      display: block;
+      margin: 20px auto;
+      text-align: center;
+      padding: 10px 20px;
+      font-weight: 600;
+      background: var(--azul);
+      color: #fff;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 0 15px var(--azul);
+      transition: background 0.3s ease;
+      width: fit-content;
+    }
+
+    .btn-seguir:hover {
+      background: var(--rojo);
+      box-shadow: 0 0 15px var(--rojo);
     }
 
     main {
-      padding: 20px;
-      max-width: 960px;
+      padding: 30px;
+      max-width: 1000px;
       margin: auto;
     }
 
     h2 {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
       font-size: 2rem;
-      color: var(--color-azul);
-      text-shadow: 0 0 5px var(--color-azul);
+      color: var(--rojo);
+      text-shadow: 0 0 6px var(--rojo);
     }
 
     .repo-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      margin: 15px 0;
+      background: rgba(255,255,255,0.07);
+      border-radius: 15px;
+      margin: 20px 0;
       padding: 20px;
-      box-shadow: 0 0 10px var(--neon-brillo);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 0 15px var(--neon-blur);
       backdrop-filter: blur(10px);
       transition: transform 0.3s ease;
     }
 
     .repo-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 15px var(--color-rojo);
+      transform: scale(1.02);
+      box-shadow: 0 0 20px var(--azul);
+    }
+
+    .repo-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px var(--azul);
+      object-fit: cover;
+    }
+
+    .repo-card div {
+      flex: 1;
+    }
+
+    .repo-card h3 {
+      margin: 0 0 10px;
+      color: var(--azul);
+      font-size: 1.4rem;
     }
 
     .repo-card p {
-      margin: 0 0 10px;
-      line-height: 1.6;
-    }
-
-    .repo-links {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .repo-links a {
-      background: var(--color-azul);
-      color: white;
-      padding: 8px 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 10px var(--color-azul);
-      transition: background 0.3s ease;
-    }
-
-    .repo-links a:hover {
-      background: var(--color-rojo);
-      box-shadow: 0 0 10px var(--color-rojo);
+      margin: 0;
+      line-height: 1.5;
     }
 
     .footer-dark {
       background: #111;
       color: #eee;
-      padding: 30px;
+      padding: 40px;
       text-align: center;
-      box-shadow: 0 0 20px var(--color-rojo);
+      margin-top: 50px;
+      box-shadow: 0 0 30px var(--rojo);
     }
 
-    .github-links {
-      margin-bottom: 20px;
-    }
-
-    .github-links a {
-      color: var(--color-azul);
-      margin: 5px;
+    .footer-dark a {
+      color: var(--azul);
+      margin: 8px;
       text-decoration: none;
       font-weight: bold;
       display: inline-block;
     }
 
-    .github-links a:hover {
-      color: var(--color-rojo);
+    .footer-dark a:hover {
+      color: var(--rojo);
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
-  <!-- Banner y logo -->
+  <!-- Banner -->
   <header class="banner">
     <img src="assets/banner.png" alt="Banner" class="banner-img"/>
     <div class="logo-container">
@@ -149,44 +165,59 @@
     </div>
   </header>
 
-  <!-- Repositorios y documentación -->
+  <!-- Botón de seguir -->
+  <a href="https://github.com/jesusquijada34" target="_blank" class="btn-seguir">Seguir en GitHub</a>
+
+  <!-- Documentación de repositorios -->
   <main>
     <h2>Documentación de Proyectos</h2>
 
     <div class="repo-card">
-      <h3>Influent OS</h3>
-      <p>Sistema visual revolucionario con ecosistema modular. Automatiza y transforma...</p>
-      <div class="repo-links">
-        <a href="https://github.com/jesusquijada34/InfluentOS" target="_blank">GitHub</a>
-        <a href="https://jesusquijada34.github.io/influentOS" target="_blank">Live Web</a>
+      <img src="assets/grepify-dev.png" alt="Grepify Dev">
+      <div>
+        <h3>grepify-dev</h3>
+        <p>Motor avanzado para procesamiento de texto en CLI con filtros y detección inteligente...</p>
       </div>
     </div>
 
     <div class="repo-card">
-      <h3>Package Maker</h3>
-      <p>Herramienta profesional para generar paquetes multiplataforma con estética visual...</p>
-      <div class="repo-links">
-        <a href="https://github.com/jesusquijada34/PackageMaker" target="_blank">GitHub</a>
-        <a href="https://jesusquijada34.github.io/packagemaker" target="_blank">Live Web</a>
+      <img src="assets/gabo-ai.png" alt="Gabo AI">
+      <div>
+        <h3>gabo-ai</h3>
+        <p>Avatar digital con IA. Adaptable, visual, una extensión creativa con expresión adolescente...</p>
       </div>
     </div>
 
     <div class="repo-card">
-      <h3>FlurryOS</h3>
-      <p>OS con diseño enfocado en contraste y tipografía, ideal para creadores visuales...</p>
-      <div class="repo-links">
-        <a href="https://github.com/jesusquijada34/FlurryOS" target="_blank">GitHub</a>
-        <a href="https://jesusquijada34.github.io/flurryos/" target="_blank">Live Web</a>
+      <img src="assets/packagemaker.png" alt="Package Maker">
+      <div>
+        <h3>packagemaker</h3>
+        <p>Empaquetador multiplataforma con diseño claro, orbes, neon y compatibilidad total...</p>
       </div>
     </div>
 
-  <!-- Sección negra con enlaces -->
+    <div class="repo-card">
+      <img src="assets/GlintPay.png" alt="GlintPay">
+      <div>
+        <h3>GlintPay</h3>
+        <p>Solución de pagos con estética elegante, tipografía moderna y alta velocidad de integración...</p>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <img src="assets/matchmeter.png" alt="MatchMeter">
+      <div>
+        <h3>matchmeter</h3>
+        <p>Plataforma de métricas comparativas con curvas dinámicas y diseño visual enfocado en UX...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Pie de página -->
   <footer class="footer-dark">
-    <div class="github-links">
-      <a href="https://github.com/jesusquijada34" target="_blank">Perfil GitHub</a>
-      <a href="https://jesusquijada34.github.io" target="_blank">Web Principal</a>
-    </div>
-    <p>© 2025 · Hecho por Jesús Quijada con estilo neon y pasión visual 🔥</p>
+    <a href="https://github.com/jesusquijada34">Perfil GitHub</a>
+    <a href="https://jesusquijada34.github.io">Sitio Principal</a>
+    <p>© 2025 · Diseñado por Jesús Quijada · Ecosistemas y visión neon 🧠⚡</p>
   </footer>
 
 </body>
