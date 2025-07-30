@@ -199,65 +199,83 @@
     <div id="modal-content" class="markdown-body"></div>
   </div>
 
-  <script>
-    const repoListURL = 'https://raw.githubusercontent.com/JesusQuijada34/catalog/refs/heads/main/repo.list';
+<script>
+  const repoListURL = 'https://raw.githubusercontent.com/JesusQuijada34/catalog/refs/heads/main/repo.list';
 
-    async function loadRepos() {
-      const repoSection = document.getElementById('repos');
-      try {
-        const resList = await fetch(repoListURL);
-        const listText = await resList.text();
-        const repos = listText.split(',').map(r => r.trim()).filter(Boolean);
+  async function loadRepos() {
+    const repoSection = document.getElementById('repos');
+    try {
+      const resList = await fetch(repoListURL);
+      const listText = await resList.text();
+      const repos = listText.split(',').map(r => r.trim()).filter(Boolean);
 
-        for (const repo of repos) {
-          const readmeURL = `https://raw.githubusercontent.com/JesusQuijada34/${repo}/main/README.md`;
-          const imageURL = `assets/${repo}.png`;
+      for (const repo of repos) {
+        const readmeURL = `https://raw.githubusercontent.com/JesusQuijada34/${repo}/main/README.md`;
+        const imageURL = `assets/${repo}.png`;
 
-          try {
-            const resReadme = await fetch(readmeURL);
-            if (!resReadme.ok) continue;
-            const markdown = await resReadme.text();
-            const titleLine = markdown.split('\n').find(line => line.startsWith('#')) || repo;
-            const title = titleLine.replace(/^#\s*/, '');
+        try {
+          const resReadme = await fetch(readmeURL);
+          if (!resReadme.ok) continue;
+          const markdown = await resReadme.text();
+          const titleLine = markdown.split('\n').find(line => line.startsWith('#')) || repo;
+          const title = titleLine.replace(/^#\s*/, '');
 
-            const card = document.createElement('div');
-            card.className = 'repo-card';
-            card.innerHTML = `
-              <div class="repo-inner">
-                <div class="repo-left">
-                  <img src="${imageURL}" alt="${repo}" class="repo-logo" width="128" height="128" onerror="this.style.display='none'">
-                </div>
-                <div class="repo-info">
-                  <div class="repo-title">${title}</div>
-                  <div class="repo-buttons">
-                    <a href="https://github.com/JesusQuijada34/${repo}" target="_blank">GitHub</a>
-                    <a href="https://JesusQuijada34.github.io/${repo}" target="_blank">Live Web</a>
-                    <a href="https://github.com/JesusQuijada34/${repo}/archive/main.zip" target="_blank">Descargar</a>
-                  </div>
-                </div>
-              </div>
-            `;
-            card.onclick = () => showModal(markdown);
-            repoSection.appendChild(card);
-          } catch (e) {
-            console.warn(`README no válido para ${repo}`, e);
-          }
+          const card = document.createElement('div');
+          card.className = 'repo-card';
+          card.style.backgroundImage = `url('${imageURL}')`;
+          card.style.backgroundSize = 'cover';
+          card.style.backgroundPosition = 'center';
+          card.style.filter = 'blur(25%)';
+          card.style.position = 'relative';
+          card.style.overflow = 'hidden';
+
+          const overlay = document.createElement('div');
+          overlay.className = 'repo-overlay';
+          overlay.style.position = 'absolute';
+          overlay.style.top = '0';
+          overlay.style.left = '0';
+          overlay.style.right = '0';
+          overlay.style.bottom = '0';
+          overlay.style.backdropFilter = 'blur(25px)';
+          overlay.style.display = 'flex';
+          overlay.style.flexDirection = 'column';
+          overlay.style.justifyContent = 'space-between';
+          overlay.style.alignItems = 'center';
+          overlay.style.padding = '1em';
+          overlay.style.color = '#fff';
+          overlay.style.backgroundColor = 'rgba(0,0,0,0.4)';
+
+          overlay.innerHTML = `
+            <div class="repo-title" style="font-size: 1.2em; text-align: center;">${title}</div>
+            <div class="repo-buttons" style="display: flex; gap: 1em;">
+              <a href="https://github.com/JesusQuijada34/${repo}" target="_blank" class="repo-btn">GitHub</a>
+              <a href="https://JesusQuijada34.github.io/${repo}" target="_blank" class="repo-btn">Live Web</a>
+              <a href="https://github.com/JesusQuijada34/${repo}/archive/main.zip" target="_blank" class="repo-btn">Descargar</a>
+            </div>
+          `;
+
+          card.appendChild(overlay);
+          card.onclick = () => showModal(markdown);
+          repoSection.appendChild(card);
+        } catch (e) {
+          console.warn(`README no válido para ${repo}`, e);
         }
-      } catch (error) {
-        console.error('Error cargando la lista de repositorios', error);
       }
+    } catch (error) {
+      console.error('Error cargando la lista de repositorios', error);
     }
+  }
 
-    function showModal(content) {
-      document.getElementById('modal-content').innerHTML = marked.parse(content);
-      document.getElementById('modal').style.display = 'flex';
-    }
+  function showModal(content) {
+    document.getElementById('modal-content').innerHTML = marked.parse(content);
+    document.getElementById('modal').style.display = 'flex';
+  }
 
-    function toggleModal() {
-      document.getElementById('modal').style.display = 'none';
-    }
+  function toggleModal() {
+    document.getElementById('modal').style.display = 'none';
+  }
 
-    loadRepos();
-  </script>
+  loadRepos();
+</script>
 </body>
 </html>
