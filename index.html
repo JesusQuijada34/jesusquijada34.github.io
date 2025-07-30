@@ -24,265 +24,410 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css/github-markdown.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
+    /* Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #0f0c29;
+      font-family: 'Segoe UI', 'Montserrat', 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 100%);
+      color: #fff;
+      min-height: 100vh;
       overflow-x: hidden;
-      color: white;
     }
 
+    /* Orb animation */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.9;
+      filter: blur(40px);
+      animation: orbFloat 16s linear infinite alternate;
+      transition: box-shadow 0.4s;
+    }
+
+    .orb.interactive {
+      pointer-events: auto;
+      cursor: pointer;
+      opacity: 1;
+      filter: blur(25px);
+      transition: filter 0.2s, opacity 0.2s;
+    }
+
+    .orb:hover {
+      box-shadow: 0 0 60px 20px #0ff, 0 0 0 0 #fff;
+      filter: blur(7px) brightness(1.7);
+      opacity: 1;
+    }
+
+    @keyframes orbFloat {
+      0% { transform: translateY(0) scale(1) }
+      50% { transform: translateY(-70px) scale(1.1) }
+      100% { transform: translateY(0) scale(1) }
+    }
+
+    /* Banner and Logo */
     header {
       position: relative;
-      height: 320px;
-      background: linear-gradient(135deg, #1e1e2f, #3a3a5f);
+      width: 100vw;
+      height: 340px;
       display: flex;
       justify-content: center;
       align-items: flex-end;
-      overflow: hidden;
+      overflow: visible;
+      z-index: 1;
     }
-
-    .orb {
+    #banner {
       position: absolute;
-      border-radius: 50%;
-      background: rgba(0,255,255,0.2);
-      animation: float 20s infinite linear;
-      filter: blur(40px);
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.65;
+      z-index: 1;
+      pointer-events: none;
+      filter: blur(2px) brightness(1.2);
     }
-
-    @keyframes float {
-      0% { transform: translateY(0) translateX(0); }
-      50% { transform: translateY(-100px) translateX(100px); }
-      100% { transform: translateY(0) translateX(0); }
-    }
-
     #logo-container {
-      position: absolute;
-      bottom: 20px;
-      padding: 12px;
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    #logo {
-      width: 100px;
-      border-radius: 12px;
-    }
-
-    #repos {
-      display: flex;
-      overflow-x: auto;
-      padding: 20px;
-      gap: 20px;
-      scroll-snap-type: x mandatory;
-    }
-
-    .repo-card {
-      min-width: 260px;
-      background: rgba(255,255,255,0.08);
-      border-radius: 15px;
-      backdrop-filter: blur(5px);
-      padding: 15px;
-      scroll-snap-align: start;
-      transition: transform 0.3s;
+      position: relative;
+      z-index: 2;
+      bottom: 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      background: rgba(25, 25, 35, 0.45);
+      border-radius: 24px;
+      box-shadow: 0 0 32px #0ff9, 0 0 0 2px #fff2 inset;
+      padding: 16px 24px 10px 24px;
+      backdrop-filter: blur(12px);
+    }
+    #logo {
+      width: 110px;
+      border-radius: 16px;
+      box-shadow: 0 0 44px #0ffb, 0 0 0 2px #fff6 inset;
+    }
+    #page-title {
+      margin-top: 12px;
+      font-size: 1.8em;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 16px #00ffe9, 0 0 8px #fff8;
     }
 
-    .repo-card:hover {
-      transform: scale(1.05);
+    /* Repo Cards layout */
+    #repos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 48px auto 24px auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 3;
+    }
+    .repo-card {
+      background: rgba(255,255,255,0.11);
+      border-radius: 24px;
+      box-shadow: 0 0 24px 0 #0ff6, 0 0 0 1px #fff2 inset;
+      backdrop-filter: blur(7px);
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.22s, box-shadow 0.3s;
       cursor: pointer;
+      min-height: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
     }
-
+    .repo-card:hover {
+      transform: scale(1.045) translateY(-4px);
+      box-shadow: 0 0 48px 6px #0ff5, 0 0 0 2px #fff5 inset;
+      z-index: 10;
+    }
     .repo-img {
       width: 100%;
-      height: 120px;
+      height: 140px;
       object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 10px;
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+      background: linear-gradient(135deg, #0ff6 0%, #302b63 100%);
+      border-bottom: 1px solid #0ff3;
     }
-
+    .repo-content {
+      flex: 1;
+      padding: 20px 18px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(25,25,35,0.22);
+    }
     .repo-title {
-      font-size: 1.1em;
-      margin-bottom: 10px;
+      font-size: 1.22em;
+      font-weight: 600;
+      margin-bottom: 8px;
       text-align: center;
+      color: #0ff;
+      text-shadow: 0 2px 10px #0ff5, 0 0 4px #fff6;
+      word-break: break-word;
     }
-
+    .repo-desc {
+      font-size: 1em;
+      color: #fffedc;
+      opacity: 0.92;
+      text-align: center;
+      margin-bottom: 16px;
+      min-height: 40px;
+      max-height: 80px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
     .repo-buttons {
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+      gap: 12px;
       justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 5px;
     }
-
-    .repo-buttons a {
-      background: #00ffff44;
-      border: 1px solid #0ff;
-      padding: 6px 12px;
-      border-radius: 5px;
-      color: white;
+    .repo-btn {
+      background: linear-gradient(90deg, #0ff6 0%, #fff5 100%);
+      border: none;
+      outline: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      color: #111;
+      font-weight: 500;
+      font-size: 0.98em;
+      box-shadow: 0 2px 8px #0ff6;
       text-decoration: none;
-      font-size: 0.85em;
+      transition: background 0.18s, color 0.18s;
+    }
+    .repo-btn:hover {
+      background: linear-gradient(90deg, #fff 0%, #0ff 100%);
+      color: #222;
     }
 
-    .repo-buttons a:hover {
-      background: #00ffff88;
-    }
-
+    /* Modal */
     #modal {
       position: fixed;
       top: 0; left: 0;
-      width: 100%; height: 100%;
-      backdrop-filter: blur(20px);
-      background: rgba(0,0,0,0.6);
+      width: 100vw; height: 100vh;
+      backdrop-filter: blur(22px);
+      background: rgba(0,0,0,0.7);
       display: none;
       justify-content: center;
       align-items: center;
-      z-index: 1000;
+      z-index: 9999;
+      transition: background 0.3s;
+      animation: fadeIn 0.5s;
     }
-
+    @keyframes fadeIn {
+      0% { opacity: 0;}
+      100% { opacity: 1;}
+    }
     #modal-content {
-      background: rgba(255,255,255,0.08);
+      background: rgba(25,25,35,0.90);
       border: 2px solid #0ff;
-      border-radius: 20px;
-      padding: 20px;
-      max-width: 80%;
-      max-height: 80%;
+      border-radius: 22px;
+      padding: 32px 28px;
+      max-width: 680px;
+      max-height: 80vh;
       overflow: auto;
-      box-shadow: 0 0 15px #0ff;
+      box-shadow: 0 0 32px #0ff8, 0 0 0 2px #fff9 inset;
       color: white;
       transform: scale(0.95);
       transition: all 0.3s ease;
+      position: relative;
     }
-
     #modal.show #modal-content {
       transform: scale(1);
     }
-
     #modal-close {
       position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 2em;
+      top: 24px;
+      right: 36px;
+      font-size: 2.2em;
       cursor: pointer;
       color: #0ff;
+      z-index: 2;
+      background: none;
+      border: none;
+      padding: 0;
+      line-height: 1;
+      transition: color 0.18s;
+    }
+    #modal-close:hover {
+      color: #fff;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
+      header { height: 210px; }
+      #logo { width: 70px; }
+      #logo-container { padding: 10px 12px 7px 12px; }
       #repos {
-        flex-direction: column;
-        overflow-x: hidden;
+        grid-template-columns: 1fr;
+        gap: 18px;
+        max-width: 98vw;
+        padding: 0 8px;
       }
+      .repo-card { min-height: 320px; }
+      .repo-img { height: 90px; }
+      #modal-content { padding: 18px 8px; max-width: 95vw;}
+    }
 
-      .repo-card {
-        min-width: auto;
-        width: 100%;
-      }
+    /* Orb trail effect for click */
+    .orb.pulse {
+      animation: orbPulse 0.6s linear;
+    }
+    @keyframes orbPulse {
+      0% { box-shadow: 0 0 0 0 #0ffb; }
+      40% { box-shadow: 0 0 80px 30px #0ffb; }
+      80% { box-shadow: 0 0 60px 15px #0ffb; }
+      100% { box-shadow: 0 0 0 0 #0ffb; }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="orb" style="top:10%; left:15%; width:80px; height:80px;"></div>
-    <div class="orb" style="top:50%; left:70%; width:100px; height:100px;"></div>
+    <img id="banner" src="assets/banner.png" alt="Banner">
     <div id="logo-container">
       <img id="logo" src="assets/logo.png" alt="Logo">
+      <div id="page-title">Repositorios de Jesús Quijada</div>
     </div>
   </header>
 
-  <section id="repos"></section>
+  <main>
+    <section id="repos"></section>
+  </main>
 
   <div id="modal">
-    <div id="modal-close" onclick="toggleModal()">×</div>
+    <button id="modal-close" onclick="toggleModal()">×</button>
     <div id="modal-content" class="markdown-body"></div>
   </div>
 
 <script>
+  // ORB CONFIGURATION
+  const orbColors = [
+    'rgba(0,255,255,0.22)','rgba(0,255,180,0.21)', 'rgba(0,150,255,0.18)',
+    'rgba(255,0,230,0.13)', 'rgba(0,255,100,0.16)', 'rgba(255,255,0,0.15)'
+  ];
+  const orbCount = 16;
+  const orbArray = [];
+  function spawnOrbs() {
+    for (let i = 0; i < orbCount; i++) {
+      const orb = document.createElement('div');
+      orb.className = 'orb interactive';
+      orb.style.width = `${70 + Math.random()*60}px`;
+      orb.style.height = `${70 + Math.random()*60}px`;
+      orb.style.top = `${Math.random()*90}vh`;
+      orb.style.left = `${Math.random()*100}vw`;
+      orb.style.background = orbColors[Math.floor(Math.random()*orbColors.length)];
+      orb.style.animationDelay = `${Math.random()*10}s`;
+      orb.style.zIndex = 0;
+      orb.onclick = function(e) {
+        orb.classList.add('pulse');
+        setTimeout(()=>orb.classList.remove('pulse'), 600);
+        // Interacción: randomizar posición
+        orb.style.top = `${Math.random()*90}vh`;
+        orb.style.left = `${Math.random()*100}vw`;
+      };
+      document.body.appendChild(orb);
+      orbArray.push(orb);
+    }
+  }
+  // Responsive orb reposition on resize
+  window.addEventListener('resize', ()=> {
+    orbArray.forEach(orb => {
+      orb.style.top = `${Math.random()*90}vh`;
+      orb.style.left = `${Math.random()*100}vw`;
+    });
+  });
+  spawnOrbs();
+
+  // REPO LIST
   const repoListURL = 'https://raw.githubusercontent.com/JesusQuijada34/catalog/refs/heads/main/repo.list';
 
   async function loadRepos() {
     const repoSection = document.getElementById('repos');
+    repoSection.innerHTML = `<div style='text-align:center;padding:48px 0;color:#0ff;'>Cargando repositorios...</div>`;
     try {
       const resList = await fetch(repoListURL);
       const listText = await resList.text();
       const repos = listText.split(',').map(r => r.trim()).filter(Boolean);
 
+      let cardsHtml = '';
       for (const repo of repos) {
         const readmeURL = `https://raw.githubusercontent.com/JesusQuijada34/${repo}/main/README.md`;
         const imageURL = `assets/${repo}.png`;
 
+        let markdown = '';
+        let title = repo;
+        let desc = '';
         try {
           const resReadme = await fetch(readmeURL);
           if (!resReadme.ok) continue;
-          const markdown = await resReadme.text();
-          const titleLine = markdown.split('\n').find(line => line.startsWith('#')) || repo;
-          const title = titleLine.replace(/^#\s*/, '');
-
-          const card = document.createElement('div');
-          card.className = 'repo-card';
-          card.style.width = '256px';
-          card.style.height = '256px';
-          card.style.backgroundImage = `url('${imageURL}')`;
-          card.style.backgroundSize = 'cover';
-          card.style.backgroundPosition = 'center';
-          card.style.position = 'relative';
-          card.style.overflow = 'hidden';
-          card.style.borderRadius = '12px';
-          card.style.boxShadow = '0 0 12px rgba(0,0,0,0.3)';
-          card.style.marginBottom = '16px';
-
-          const overlay = document.createElement('div');
-          overlay.className = 'repo-overlay';
-          overlay.style.position = 'absolute';
-          overlay.style.top = '0';
-          overlay.style.left = '0';
-          overlay.style.width = '100%';
-          overlay.style.height = '100%';
-          overlay.style.backdropFilter = 'blur(25px)';
-          overlay.style.backgroundColor = 'rgba(0,0,0,0.4)';
-          overlay.style.display = 'flex';
-          overlay.style.flexDirection = 'column';
-          overlay.style.justifyContent = 'space-between';
-          overlay.style.alignItems = 'center';
-          overlay.style.padding = '1em';
-          overlay.style.color = '#fff';
-          overlay.style.textAlign = 'center';
-
-          overlay.innerHTML = `
-            <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
-              <div class="repo-title" style="font-size: 1em; font-weight: bold;">${title}</div>
-            </div>
-            <div style="margin-bottom: 0.5em;">
-              <div class="repo-buttons" style="display: flex; gap: 0.5em; justify-content: center; flex-wrap: nowrap;">
-                <a href="https://github.com/JesusQuijada34/${repo}" target="_blank" class="repo-btn" style="background:#fff;color:#000;padding:4px 8px;border-radius:6px;font-size:0.75em;">GitHub</a>
-                <a href="https://JesusQuijada34.github.io/${repo}" target="_blank" class="repo-btn" style="background:#fff;color:#000;padding:4px 8px;border-radius:6px;font-size:0.75em;">Live</a>
-                <a href="https://github.com/JesusQuijada34/${repo}/archive/main.zip" target="_blank" class="repo-btn" style="background:#fff;color:#000;padding:4px 8px;border-radius:6px;font-size:0.75em;">ZIP</a>
-              </div>
-            </div>
-          `;
-
-          card.appendChild(overlay);
-          card.onclick = () => showModal(markdown);
-          repoSection.appendChild(card);
+          markdown = await resReadme.text();
+          const titleLine = markdown.split('\n').find(line => line.startsWith('#'));
+          title = titleLine ? titleLine.replace(/^#\s*/, '') : repo;
+          // Get 1st paragraph after title
+          const descLine = markdown.split('\n').find(line => line.trim() && !line.startsWith('#'));
+          desc = descLine ? descLine.replace(/[#*>\-]/g, '').trim() : '';
         } catch (e) {
-          console.warn(`README no válido para ${repo}`, e);
+          desc = '';
         }
+
+        cardsHtml += `
+        <div class="repo-card" tabindex="0" title="Ver detalles de ${title}" onclick="showModal(\`${markdown.replace(/`/g,"\\`")}\`)">
+          <img src="${imageURL}" class="repo-img" alt="Imagen ${repo}" onerror="this.src='assets/logo.png'">
+          <div class="repo-content">
+            <div>
+              <div class="repo-title">${title}</div>
+              <div class="repo-desc">${desc}</div>
+            </div>
+            <div class="repo-buttons">
+              <a href="https://github.com/JesusQuijada34/${repo}" target="_blank" class="repo-btn">GitHub</a>
+              <a href="https://JesusQuijada34.github.io/${repo}" target="_blank" class="repo-btn">Live</a>
+              <a href="https://github.com/JesusQuijada34/${repo}/archive/main.zip" target="_blank" class="repo-btn">ZIP</a>
+            </div>
+          </div>
+        </div>
+        `;
       }
+      repoSection.innerHTML = cardsHtml || `<div style='text-align:center;padding:48px 0;color:#0ff;'>No se encontraron repositorios.</div>`;
     } catch (error) {
-      console.error('Error cargando la lista de repositorios', error);
+      repoSection.innerHTML = `<div style='text-align:center;padding:48px 0;color:red;'>Error cargando la lista de repositorios</div>`;
     }
   }
 
   function showModal(content) {
     document.getElementById('modal-content').innerHTML = marked.parse(content);
     document.getElementById('modal').style.display = 'flex';
+    document.getElementById('modal').classList.add('show');
+    document.body.style.overflow = 'hidden';
   }
 
   function toggleModal() {
     document.getElementById('modal').style.display = 'none';
+    document.getElementById('modal').classList.remove('show');
+    document.body.style.overflow = '';
   }
+
+  // Cierre con tecla ESC
+  document.addEventListener('keydown', function(e){
+    if(e.key === "Escape") toggleModal();
+  });
+  document.getElementById('modal').addEventListener('click', function(e){
+    if (e.target === this) toggleModal();
+  });
 
   loadRepos();
 </script>
