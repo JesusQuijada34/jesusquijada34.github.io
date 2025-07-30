@@ -217,17 +217,24 @@
             const resReadme = await fetch(readmeURL);
             if (!resReadme.ok) continue;
             const markdown = await resReadme.text();
-            const title = (markdown.split('\n').find(line => line.startsWith('#')) || repo).replace(/^#\s*/, '');
+            const titleLine = markdown.split('\n').find(line => line.startsWith('#')) || repo;
+            const title = titleLine.replace(/^#\s*/, '');
 
             const card = document.createElement('div');
             card.className = 'repo-card';
             card.innerHTML = `
-              <img src="${imageURL}" alt="${repo}" class="repo-img" onerror="this.style.display='none'">
-              <div class="repo-title">${title}</div>
-              <div class="repo-buttons">
-                <a href="https://github.com/JesusQuijada34/${repo}" target="_blank">GitHub</a>
-                <a href="https://JesusQuijada34.github.io/${repo}" target="_blank">Live Web</a>
-                <a href="https://github.com/JesusQuijada34/${repo}/archive/main.zip" target="_blank">Descargar</a>
+              <div class="repo-inner">
+                <div class="repo-left">
+                  <img src="${imageURL}" alt="${repo}" class="repo-logo" width="128" height="128" onerror="this.style.display='none'">
+                </div>
+                <div class="repo-info">
+                  <div class="repo-title">${title}</div>
+                  <div class="repo-buttons">
+                    <a href="https://github.com/JesusQuijada34/${repo}" target="_blank">GitHub</a>
+                    <a href="https://JesusQuijada34.github.io/${repo}" target="_blank">Live Web</a>
+                    <a href="https://github.com/JesusQuijada34/${repo}/archive/main.zip" target="_blank">Descargar</a>
+                  </div>
+                </div>
               </div>
             `;
             card.onclick = () => showModal(markdown);
