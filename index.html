@@ -222,35 +222,44 @@
 
           const card = document.createElement('div');
           card.className = 'repo-card';
+          card.style.width = '256px';
+          card.style.height = '256px';
           card.style.backgroundImage = `url('${imageURL}')`;
-          card.style.backgroundSize = '256px';
+          card.style.backgroundSize = 'cover';
           card.style.backgroundPosition = 'center';
-          card.style.filter = 'blur(25%)';
           card.style.position = 'relative';
           card.style.overflow = 'hidden';
+          card.style.borderRadius = '12px';
+          card.style.boxShadow = '0 0 12px rgba(0,0,0,0.3)';
+          card.style.marginBottom = '16px';
 
           const overlay = document.createElement('div');
           overlay.className = 'repo-overlay';
           overlay.style.position = 'absolute';
           overlay.style.top = '0';
           overlay.style.left = '0';
-          overlay.style.right = '0';
-          overlay.style.bottom = '0';
+          overlay.style.width = '100%';
+          overlay.style.height = '100%';
           overlay.style.backdropFilter = 'blur(25px)';
+          overlay.style.backgroundColor = 'rgba(0,0,0,0.4)';
           overlay.style.display = 'flex';
           overlay.style.flexDirection = 'column';
           overlay.style.justifyContent = 'space-between';
           overlay.style.alignItems = 'center';
           overlay.style.padding = '1em';
           overlay.style.color = '#fff';
-          overlay.style.backgroundColor = 'rgba(0,0,0,0.4)';
+          overlay.style.textAlign = 'center';
 
           overlay.innerHTML = `
-            <div class="repo-title" style="font-size: 1.2em; text-align: center;">${title}</div>
-            <div class="repo-buttons" style="display: flex; gap: 1em;">
-              <a href="https://github.com/JesusQuijada34/${repo}" target="_blank" class="repo-btn">GitHub</a>
-              <a href="https://JesusQuijada34.github.io/${repo}" target="_blank" class="repo-btn">Live Web</a>
-              <a href="https://github.com/JesusQuijada34/${repo}/archive/main.zip" target="_blank" class="repo-btn">Descargar</a>
+            <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
+              <div class="repo-title" style="font-size: 1em; font-weight: bold;">${title}</div>
+            </div>
+            <div style="margin-bottom: 0.5em;">
+              <div class="repo-buttons" style="display: flex; gap: 0.5em; justify-content: center; flex-wrap: nowrap;">
+                <a href="https://github.com/JesusQuijada34/${repo}" target="_blank" class="repo-btn" style="background:#fff;color:#000;padding:4px 8px;border-radius:6px;font-size:0.75em;">GitHub</a>
+                <a href="https://JesusQuijada34.github.io/${repo}" target="_blank" class="repo-btn" style="background:#fff;color:#000;padding:4px 8px;border-radius:6px;font-size:0.75em;">Live</a>
+                <a href="https://github.com/JesusQuijada34/${repo}/archive/main.zip" target="_blank" class="repo-btn" style="background:#fff;color:#000;padding:4px 8px;border-radius:6px;font-size:0.75em;">ZIP</a>
+              </div>
             </div>
           `;
 
