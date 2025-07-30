@@ -24,14 +24,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css/github-markdown.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
-    /* Reset */
     *, *::before, *::after {
       box-sizing: border-box;
     }
     body {
       margin: 0;
       font-family: 'Segoe UI', 'Montserrat', 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #0f0c29 0%, #302b63 100%);
+      background: linear-gradient(135deg, #0f2c5c 0%, #7ec6ff 100%);
       color: #fff;
       min-height: 100vh;
       overflow-x: hidden;
@@ -48,7 +47,6 @@
       animation: orbFloat 16s linear infinite alternate;
       transition: box-shadow 0.4s;
     }
-
     .orb.interactive {
       pointer-events: auto;
       cursor: pointer;
@@ -56,27 +54,36 @@
       filter: blur(25px);
       transition: filter 0.2s, opacity 0.2s;
     }
-
     .orb:hover {
-      box-shadow: 0 0 60px 20px #0ff, 0 0 0 0 #fff;
+      box-shadow: 0 0 60px 20px #7ec6ff, 0 0 0 0 #fff;
       filter: blur(7px) brightness(1.7);
       opacity: 1;
     }
-
     @keyframes orbFloat {
       0% { transform: translateY(0) scale(1) }
       50% { transform: translateY(-70px) scale(1.1) }
       100% { transform: translateY(0) scale(1) }
     }
+    .orb.pulse {
+      animation: orbPulse 0.6s linear;
+    }
+    @keyframes orbPulse {
+      0% { box-shadow: 0 0 0 0 #7ec6ff; }
+      40% { box-shadow: 0 0 80px 30px #7ec6ff; }
+      80% { box-shadow: 0 0 60px 15px #7ec6ff; }
+      100% { box-shadow: 0 0 0 0 #7ec6ff; }
+    }
 
-    /* Banner and Logo */
-    header {
+    /* Facebook-style profile section */
+    .fb-profile-header {
       position: relative;
       width: 100vw;
       height: 340px;
+      background: linear-gradient(90deg, #1167b1 0%, #7ec6ff 100%);
       display: flex;
-      justify-content: center;
-      align-items: flex-end;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
       overflow: visible;
       z-index: 1;
     }
@@ -91,38 +98,70 @@
       opacity: 0.65;
       z-index: 1;
       pointer-events: none;
-      filter: blur(2px) brightness(1.2);
+      filter: blur(3px) brightness(1.2);
+      background: linear-gradient(90deg, #1167b1 0%, #7ec6ff 100%);
     }
-    #logo-container {
+    .fb-profile-info {
       position: relative;
       z-index: 2;
-      bottom: 16px;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      background: rgba(25, 25, 35, 0.45);
-      border-radius: 24px;
-      box-shadow: 0 0 32px #0ff9, 0 0 0 2px #fff2 inset;
-      padding: 16px 24px 10px 24px;
-      backdrop-filter: blur(12px);
+      gap: 28px;
+      margin-bottom: 18px;
+      background: rgba(255, 255, 255, 0.13);
+      border-radius: 32px;
+      padding: 20px 38px 20px 28px;
+      box-shadow: 0 0 30px #1167b1, 0 0 0 2px #7ec6ff inset;
+      backdrop-filter: blur(10px);
     }
     #logo {
-      width: 110px;
+      width: 128px;
+      height: 128px;
       border-radius: 16px;
-      box-shadow: 0 0 44px #0ffb, 0 0 0 2px #fff6 inset;
+      box-shadow: 0 0 22px #7ec6ff, 0 0 0 2px #1167b1 inset;
+      object-fit: cover;
+      background: #fff;
+      border: 3px solid #1167b1;
     }
-    #page-title {
-      margin-top: 12px;
-      font-size: 1.8em;
+    .fb-profile-details {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .fb-profile-name {
+      font-size: 2.1em;
       font-weight: bold;
-      letter-spacing: 2px;
-      text-shadow: 0 2px 16px #00ffe9, 0 0 8px #fff8;
+      color: #1167b1;
+      text-shadow: 0 2px 14px #7ec6ff, 0 0 8px #fff6;
+      margin-bottom: 4px;
+    }
+    .fb-follow-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #1167b1 50%, #7ec6ff 100%);
+      color: #fff;
+      border: none;
+      outline: none;
+      padding: 10px 32px;
+      border-radius: 7px;
+      font-size: 1.13em;
+      font-weight: 500;
+      box-shadow: 0 2px 12px #1167b1;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, box-shadow 0.2s;
+      margin-top: 2px;
+      margin-bottom: 6px;
+    }
+    .fb-follow-btn:hover {
+      background: linear-gradient(90deg, #7ec6ff 0%, #1167b1 100%);
+      color: #fff;
+      box-shadow: 0 2px 24px #7ec6ff;
     }
 
     /* Repo Cards layout */
     #repos {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 32px;
       width: 100%;
       max-width: 1200px;
@@ -132,9 +171,9 @@
       z-index: 3;
     }
     .repo-card {
-      background: rgba(255,255,255,0.11);
+      background: linear-gradient(135deg, #1167b1 0%, #7ec6ff 100%);
       border-radius: 24px;
-      box-shadow: 0 0 24px 0 #0ff6, 0 0 0 1px #fff2 inset;
+      box-shadow: 0 0 24px 0 #1167b1, 0 0 0 2px #7ec6ff inset;
       backdrop-filter: blur(7px);
       padding: 0;
       overflow: hidden;
@@ -148,40 +187,42 @@
     }
     .repo-card:hover {
       transform: scale(1.045) translateY(-4px);
-      box-shadow: 0 0 48px 6px #0ff5, 0 0 0 2px #fff5 inset;
+      box-shadow: 0 0 48px 6px #7ec6ff, 0 0 0 2px #1167b1 inset;
       z-index: 10;
     }
     .repo-img {
-      width: 100%;
-      height: 140px;
+      width: 128px;
+      height: 128px;
       object-fit: cover;
-      border-top-left-radius: 24px;
-      border-top-right-radius: 24px;
-      background: linear-gradient(135deg, #0ff6 0%, #302b63 100%);
-      border-bottom: 1px solid #0ff3;
+      border-radius: 16px;
+      background: #fff;
+      margin: 16px auto 0 auto;
+      box-shadow: 0 0 16px #7ec6ff, 0 0 0 2px #1167b1 inset;
+      border: 2px solid #1167b1;
+      display: block;
     }
     .repo-content {
       flex: 1;
-      padding: 20px 18px 16px 18px;
+      padding: 18px 18px 16px 18px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      background: rgba(25,25,35,0.22);
+      background: rgba(25,25,35,0.11);
     }
     .repo-title {
       font-size: 1.22em;
       font-weight: 600;
       margin-bottom: 8px;
       text-align: center;
-      color: #0ff;
-      text-shadow: 0 2px 10px #0ff5, 0 0 4px #fff6;
+      color: #7ec6ff;
+      text-shadow: 0 2px 10px #1167b1, 0 0 4px #fff6;
       word-break: break-word;
     }
     .repo-desc {
       font-size: 1em;
-      color: #fffedc;
-      opacity: 0.92;
+      color: #e7f5ff;
+      opacity: 0.96;
       text-align: center;
       margin-bottom: 16px;
       min-height: 40px;
@@ -199,21 +240,21 @@
       margin-top: 5px;
     }
     .repo-btn {
-      background: linear-gradient(90deg, #0ff6 0%, #fff5 100%);
+      background: linear-gradient(90deg, #1167b1 50%, #7ec6ff 100%);
       border: none;
       outline: none;
       padding: 8px 18px;
       border-radius: 8px;
-      color: #111;
+      color: #fff;
       font-weight: 500;
       font-size: 0.98em;
-      box-shadow: 0 2px 8px #0ff6;
+      box-shadow: 0 2px 8px #7ec6ff;
       text-decoration: none;
       transition: background 0.18s, color 0.18s;
     }
     .repo-btn:hover {
-      background: linear-gradient(90deg, #fff 0%, #0ff 100%);
-      color: #222;
+      background: linear-gradient(90deg, #7ec6ff 0%, #1167b1 100%);
+      color: #fff;
     }
 
     /* Modal */
@@ -222,7 +263,7 @@
       top: 0; left: 0;
       width: 100vw; height: 100vh;
       backdrop-filter: blur(22px);
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,32,0.7);
       display: none;
       justify-content: center;
       align-items: center;
@@ -235,14 +276,14 @@
       100% { opacity: 1;}
     }
     #modal-content {
-      background: rgba(25,25,35,0.90);
-      border: 2px solid #0ff;
+      background: linear-gradient(135deg, #1167b1 0%, #7ec6ff 100%);
+      border: 2px solid #7ec6ff;
       border-radius: 22px;
       padding: 32px 28px;
       max-width: 680px;
       max-height: 80vh;
       overflow: auto;
-      box-shadow: 0 0 32px #0ff8, 0 0 0 2px #fff9 inset;
+      box-shadow: 0 0 32px #7ec6ff, 0 0 0 2px #1167b1 inset;
       color: white;
       transform: scale(0.95);
       transition: all 0.3s ease;
@@ -257,7 +298,7 @@
       right: 36px;
       font-size: 2.2em;
       cursor: pointer;
-      color: #0ff;
+      color: #7ec6ff;
       z-index: 2;
       background: none;
       border: none;
@@ -266,13 +307,14 @@
       transition: color 0.18s;
     }
     #modal-close:hover {
-      color: #fff;
+      color: #1167b1;
     }
 
     @media (max-width: 700px) {
-      header { height: 210px; }
-      #logo { width: 70px; }
-      #logo-container { padding: 10px 12px 7px 12px; }
+      .fb-profile-header { height: 210px; }
+      #logo { width: 76px; height: 76px; }
+      .fb-profile-info { padding: 8px 10px; gap: 14px; }
+      .fb-profile-name { font-size: 1.1em;}
       #repos {
         grid-template-columns: 1fr;
         gap: 18px;
@@ -280,30 +322,27 @@
         padding: 0 8px;
       }
       .repo-card { min-height: 320px; }
-      .repo-img { height: 90px; }
+      .repo-img { width: 76px; height: 76px; }
       #modal-content { padding: 18px 8px; max-width: 95vw;}
-    }
-
-    /* Orb trail effect for click */
-    .orb.pulse {
-      animation: orbPulse 0.6s linear;
-    }
-    @keyframes orbPulse {
-      0% { box-shadow: 0 0 0 0 #0ffb; }
-      40% { box-shadow: 0 0 80px 30px #0ffb; }
-      80% { box-shadow: 0 0 60px 15px #0ffb; }
-      100% { box-shadow: 0 0 0 0 #0ffb; }
     }
   </style>
 </head>
 <body>
-  <header>
+  <div class="fb-profile-header">
     <img id="banner" src="assets/banner.png" alt="Banner">
-    <div id="logo-container">
+    <div class="fb-profile-info">
       <img id="logo" src="assets/logo.png" alt="Logo">
-      <div id="page-title">Repositorios de Jesús Quijada</div>
+      <div class="fb-profile-details">
+        <div class="fb-profile-name">Jesus Quijada</div>
+        <button class="fb-follow-btn" onclick="alert('¡Gracias por seguir a Jesus Quijada!')">
+          <svg style="vertical-align:middle;margin-right:6px;" height="20" viewBox="0 0 24 24" width="20" fill="#fff">
+            <path d="M16 11c1.66 0 2.99 1.34 2.99 3L19 19c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2v-5c0-1.66 1.34-3 3-3h8zm-8-3c0-1.66 1.34-3 3-3s3 1.34 3 3-1.34 3-3 3-3-1.34-3-3z"/>
+          </svg>
+          Seguir
+        </button>
+      </div>
     </div>
-  </header>
+  </div>
 
   <main>
     <section id="repos"></section>
@@ -317,8 +356,8 @@
 <script>
   // ORB CONFIGURATION
   const orbColors = [
-    'rgba(0,255,255,0.22)','rgba(0,255,180,0.21)', 'rgba(0,150,255,0.18)',
-    'rgba(255,0,230,0.13)', 'rgba(0,255,100,0.16)', 'rgba(255,255,0,0.15)'
+    'rgba(17,103,177,0.18)','rgba(126,198,255,0.21)', 'rgba(17,103,177,0.15)',
+    'rgba(126,198,255,0.13)', 'rgba(17,103,177,0.12)', 'rgba(126,198,255,0.11)'
   ];
   const orbCount = 16;
   const orbArray = [];
@@ -344,7 +383,6 @@
       orbArray.push(orb);
     }
   }
-  // Responsive orb reposition on resize
   window.addEventListener('resize', ()=> {
     orbArray.forEach(orb => {
       orb.style.top = `${Math.random()*90}vh`;
@@ -358,7 +396,7 @@
 
   async function loadRepos() {
     const repoSection = document.getElementById('repos');
-    repoSection.innerHTML = `<div style='text-align:center;padding:48px 0;color:#0ff;'>Cargando repositorios...</div>`;
+    repoSection.innerHTML = `<div style='text-align:center;padding:48px 0;color:#7ec6ff;'>Cargando repositorios...</div>`;
     try {
       const resList = await fetch(repoListURL);
       const listText = await resList.text();
@@ -402,7 +440,7 @@
         </div>
         `;
       }
-      repoSection.innerHTML = cardsHtml || `<div style='text-align:center;padding:48px 0;color:#0ff;'>No se encontraron repositorios.</div>`;
+      repoSection.innerHTML = cardsHtml || `<div style='text-align:center;padding:48px 0;color:#7ec6ff;'>No se encontraron repositorios.</div>`;
     } catch (error) {
       repoSection.innerHTML = `<div style='text-align:center;padding:48px 0;color:red;'>Error cargando la lista de repositorios</div>`;
     }
@@ -414,14 +452,11 @@
     document.getElementById('modal').classList.add('show');
     document.body.style.overflow = 'hidden';
   }
-
   function toggleModal() {
     document.getElementById('modal').style.display = 'none';
     document.getElementById('modal').classList.remove('show');
     document.body.style.overflow = '';
   }
-
-  // Cierre con tecla ESC
   document.addEventListener('keydown', function(e){
     if(e.key === "Escape") toggleModal();
   });
