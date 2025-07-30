@@ -3,134 +3,139 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Proyectos de Jesús Quijada</title>
+  <title>Jesús Quijada - Repos</title>
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <!-- 🔹 Favicon -->
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Proyectos de Jesús Quijada">
-  <meta property="og:description" content="Explora los repositorios, herramientas y diseños de Jesús Quijada">
-  <meta property="og:image" content="https://jesusquijada34.github.io/assets/banner.png">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://jesusquijada34.github.io/">
+  <!-- 🔹 Vista previa redes sociales -->
+  <meta property="og:title" content="Catálogo de Repos de Jesús Quijada" />
+  <meta property="og:description" content="Explora herramientas, diseños y proyectos de JSQ34." />
+  <meta property="og:image" content="https://jesusquijada34.github.io/catalog/assets/social-banner.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jesusquijada34.github.io/catalog" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Proyectos de Jesús Quijada">
-  <meta name="twitter:description" content="Explora sus proyectos visuales y técnicos en GitHub Pages.">
-  <meta name="twitter:image" content="https://jesusquijada34.github.io/assets/banner.png">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://jesusquijada34.github.io/catalog/assets/social-banner.png" />
+  <meta name="twitter:title" content="Catálogo de JSQ34" />
+  <meta name="twitter:description" content="Proyectos visuales, terminales y herramientas útiles por Jesús Quijada." />
 
-  <!-- Markdown parser -->
+  <!-- 🔹 Markdown parser -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-  <!-- Estilos -->
+  <!-- 🔹 Estilo visual -->
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #140043, #6100af);
-      color: #fff;
-      min-height: 100vh;
-    }
-    header {
-      width: 100%;
-      height: 300px;
-      background-image: url("assets/banner.png");
-      background-size: cover;
-      background-position: center;
-      border-bottom: 4px solid rgba(255,255,255,0.2);
+      color: white;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      overflow-x: hidden;
       position: relative;
     }
-    header::after {
-      content: "";
+
+    .orb {
       position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, #ff00ff22 0%, transparent 80%);
-      backdrop-filter: blur(3px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), transparent 70%);
+      animation: float 20s linear infinite;
+      mix-blend-mode: overlay;
     }
+
+    .orb:nth-child(1) { width: 150px; height: 150px; top: 10%; left: 15%; animation-delay: 0s; }
+    .orb:nth-child(2) { width: 200px; height: 200px; top: 40%; left: 70%; animation-delay: 4s; }
+    .orb:nth-child(3) { width: 120px; height: 120px; top: 75%; left: 30%; animation-delay: 8s; }
+
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      50% { transform: translateY(-50px) scale(1.1); opacity: 0.8; }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
     h1 {
       text-align: center;
-      margin: 1em 0 0.5em;
-      font-size: 2em;
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+      padding: 2rem;
+      font-size: 2.5rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
     }
+
     #repos {
-      padding: 2em;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2em;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
     }
+
     .card {
-      background: radial-gradient(circle at top left, #ff00ff22, #ffffff11);
-      border-radius: 16px;
-      padding: 1em;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      backdrop-filter: blur(8px);
       position: relative;
-      box-shadow: 0 0 12px #0005;
-      transition: transform 0.3s;
-      backdrop-filter: blur(6px);
+      transition: transform 0.3s ease;
     }
+
     .card:hover {
       transform: scale(1.02);
     }
+
+    .card h3 {
+      margin: 0.5rem 0;
+    }
+
     .card img {
       width: 100%;
-      border-radius: 12px;
-      margin-bottom: 0.5em;
-    }
-    .card h3 {
-      margin: 0.5em 0;
-      font-size: 1.4em;
-    }
-    .markdown {
-      background: #ffffff11;
-      padding: 0.5em;
       border-radius: 8px;
-      overflow: auto;
+      margin-bottom: 1rem;
     }
-    button {
-      margin: 0.5em 0.25em;
-      padding: 0.6em 1em;
+
+    .card button {
+      margin: 0.5rem 0.3rem 0;
+      padding: 0.4rem 1rem;
       border: none;
-      border-radius: 8px;
-      background: #ff00ff66;
+      border-radius: 6px;
+      background: #ffffff22;
       color: white;
       cursor: pointer;
-      font-weight: bold;
       transition: background 0.3s;
     }
-    button:hover {
-      background: #ff00ff99;
+
+    .card button:hover {
+      background: #ffffff44;
     }
-    .nuevo-efecto {
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      z-index: 1;
-      pointer-events: none;
-    }
+
     .nuevo-efecto svg {
+      position: absolute;
+      top: -20px;
+      left: -20px;
       width: 60px;
       height: 60px;
-      animation: glow 1.5s infinite ease-in-out;
     }
-    @keyframes glow {
-      0% { opacity: 0.3; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.2); }
-      100% { opacity: 0.3; transform: scale(1); }
+
+    .markdown {
+      max-height: 150px;
+      overflow-y: auto;
     }
   </style>
 </head>
 <body>
-  <header></header>
-  <h1>✨ Proyectos de Jesús Quijada</h1>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+
+  <h1>Mis Repositorios</h1>
   <div id="repos"></div>
+
   <script>
     const REPO_LIST = 'https://raw.githubusercontent.com/JesusQuijada34/catalog/refs/heads/main/repo.list';
 
     async function cargarRepos() {
       const res = await fetch(REPO_LIST);
-      const repos = (await res.text()).trim().split('\n');
+      const rawList = await res.text();
+      const repos = rawList.split(',').map(r => r.trim()).filter(r => r);
       const container = document.getElementById('repos');
 
       for (const repo of repos) {
