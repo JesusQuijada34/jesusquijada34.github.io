@@ -1,471 +1,110 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Repositorios de Jesús Quijada</title>
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/logo.png" />
-  <meta name="referrer" content="origin-when-cross-origin" />
-  <meta name="description" content="Jesús Quijada crea experiencias visuales y herramientas inteligentes como IPM, Package Maker e Influent OS. Desde interfaces terminales hasta avatars como Gabo Al, su trabajo mezcla compatibilidad, automatización y diseño vibrante." />
-  <meta property="og:title" content="Jesús Quijada | Diseñador & Desarrollador Creativo" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Jesús Quijada | GitHub & Creatividad" />
-  <meta property="og:description" content="Explora los proyectos y diseños visuales de Jesús Quijada. Desde sistemas operativos minimalistas hasta meta tags personalizados, cada detalle refleja claridad y personalidad." />
-  <meta property="og:url" content="https://jesusquijada34.github.io/" />
-  <meta property="og:image" content="https://jesusquijada34.github.io/assets/banner.png" />
-  <meta property="og:image:width" content="600" />
-  <meta property="og:image:height" content="315" />
-  <link rel="icon" href="https://jesusquijada34.github.io/assets/logo.png" />
-
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css/github-markdown.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Jesús Quijada | IPM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
     body {
-      margin: 0;
-      font-family: 'Segoe UI', 'Montserrat', 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #0f2c5c 0%, #7ec6ff 100%);
+      background: radial-gradient(circle at top left, #0f0c29, #302b63, #24243e);
       color: #fff;
-      min-height: 100vh;
-      overflow-x: hidden;
+      font-family: 'Segoe UI', sans-serif;
     }
-
-    /* Orb animation */
-    .orb {
-      position: fixed;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.9;
-      filter: blur(40px);
-      animation: orbFloat 16s linear infinite alternate;
-      transition: box-shadow 0.4s;
-    }
-    .orb.interactive {
-      pointer-events: auto;
-      cursor: pointer;
-      opacity: 1;
-      filter: blur(25px);
-      transition: filter 0.2s, opacity 0.2s;
-    }
-    .orb:hover {
-      box-shadow: 0 0 60px 20px #7ec6ff, 0 0 0 0 #fff;
-      filter: blur(7px) brightness(1.7);
-      opacity: 1;
-    }
-    @keyframes orbFloat {
-      0% { transform: translateY(0) scale(1) }
-      50% { transform: translateY(-70px) scale(1.1) }
-      100% { transform: translateY(0) scale(1) }
-    }
-    .orb.pulse {
-      animation: orbPulse 0.6s linear;
-    }
-    @keyframes orbPulse {
-      0% { box-shadow: 0 0 0 0 #7ec6ff; }
-      40% { box-shadow: 0 0 80px 30px #7ec6ff; }
-      80% { box-shadow: 0 0 60px 15px #7ec6ff; }
-      100% { box-shadow: 0 0 0 0 #7ec6ff; }
-    }
-
-    /* Facebook-style profile section */
-    .fb-profile-header {
+    .banner {
+      width: 100%;
+      height: 250px;
+      background-image: url('assets/banner.jpg');
+      background-size: cover;
+      background-position: center;
       position: relative;
-      width: 100vw;
-      height: 340px;
-      background: linear-gradient(90deg, #1167b1 0%, #7ec6ff 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      overflow: visible;
-      z-index: 1;
     }
-    #banner {
+    .logo-link {
       position: absolute;
-      top: 0;
+      bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 100vw;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.65;
-      z-index: 1;
-      pointer-events: none;
-      filter: blur(3px) brightness(1.2);
-      background: linear-gradient(90deg, #1167b1 0%, #7ec6ff 100%);
-    }
-    .fb-profile-info {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      margin-bottom: 18px;
-      background: rgba(255, 255, 255, 0.13);
-      border-radius: 32px;
-      padding: 20px 38px 20px 28px;
-      box-shadow: 0 0 30px #1167b1, 0 0 0 2px #7ec6ff inset;
-      backdrop-filter: blur(10px);
-    }
-    #logo {
-      width: 128px;
-      height: 128px;
-      border-radius: 16px;
-      box-shadow: 0 0 22px #7ec6ff, 0 0 0 2px #1167b1 inset;
-      object-fit: cover;
-      background: #fff;
-      border: 3px solid #1167b1;
-    }
-    .fb-profile-details {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      align-items: flex-start;
-    }
-    .fb-profile-name {
-      font-size: 2.1em;
-      font-weight: bold;
-      color: #1167b1;
-      text-shadow: 0 2px 14px #7ec6ff, 0 0 8px #fff6;
-      margin-bottom: 4px;
-    }
-    .fb-follow-btn {
-      display: inline-block;
-      background: linear-gradient(90deg, #1167b1 50%, #7ec6ff 100%);
-      color: #fff;
-      border: none;
-      outline: none;
-      padding: 10px 32px;
-      border-radius: 7px;
-      font-size: 1.13em;
-      font-weight: 500;
-      box-shadow: 0 2px 12px #1167b1;
-      cursor: pointer;
-      transition: background 0.18s, color 0.18s, box-shadow 0.2s;
-      margin-top: 2px;
-      margin-bottom: 6px;
-    }
-    .fb-follow-btn:hover {
-      background: linear-gradient(90deg, #7ec6ff 0%, #1167b1 100%);
-      color: #fff;
-      box-shadow: 0 2px 24px #7ec6ff;
-    }
-
-    /* Repo Cards layout */
-    #repos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 32px;
-      width: 100%;
-      max-width: 1200px;
-      margin: 48px auto 24px auto;
-      padding: 0 24px;
-      position: relative;
-      z-index: 3;
+      width: 32px;
+      height: 32px;
+      z-index: 5;
     }
     .repo-card {
-      background: linear-gradient(135deg, #1167b1 0%, #7ec6ff 100%);
-      border-radius: 24px;
-      box-shadow: 0 0 24px 0 #1167b1, 0 0 0 2px #7ec6ff inset;
-      backdrop-filter: blur(7px);
-      padding: 0;
-      overflow: hidden;
-      position: relative;
-      transition: transform 0.22s, box-shadow 0.3s;
-      cursor: pointer;
-      min-height: 350px;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
+      background-color: rgba(0, 255, 255, 0.05);
+      border: 1px solid #0ff;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease-in-out;
     }
     .repo-card:hover {
-      transform: scale(1.045) translateY(-4px);
-      box-shadow: 0 0 48px 6px #7ec6ff, 0 0 0 2px #1167b1 inset;
-      z-index: 10;
+      box-shadow: 0 0 15px #00ffff;
+      transform: scale(1.02);
     }
-    .repo-img {
-      width: 128px;
-      height: 128px;
-      object-fit: cover;
-      border-radius: 16px;
-      background: #fff;
-      margin: 16px auto 0 auto;
-      box-shadow: 0 0 16px #7ec6ff, 0 0 0 2px #1167b1 inset;
-      border: 2px solid #1167b1;
-      display: block;
-    }
-    .repo-content {
-      flex: 1;
-      padding: 18px 18px 16px 18px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(25,25,35,0.11);
-    }
-    .repo-title {
-      font-size: 1.22em;
-      font-weight: 600;
-      margin-bottom: 8px;
-      text-align: center;
-      color: #7ec6ff;
-      text-shadow: 0 2px 10px #1167b1, 0 0 4px #fff6;
-      word-break: break-word;
-    }
-    .repo-desc {
-      font-size: 1em;
-      color: #e7f5ff;
-      opacity: 0.96;
-      text-align: center;
-      margin-bottom: 16px;
-      min-height: 40px;
-      max-height: 80px;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-    }
-    .repo-buttons {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 5px;
-    }
-    .repo-btn {
-      background: linear-gradient(90deg, #1167b1 50%, #7ec6ff 100%);
+    .btn-flat {
+      border-radius: 0;
+      background: #00ffff;
+      color: #000;
       border: none;
-      outline: none;
-      padding: 8px 18px;
-      border-radius: 8px;
-      color: #fff;
-      font-weight: 500;
-      font-size: 0.98em;
-      box-shadow: 0 2px 8px #7ec6ff;
-      text-decoration: none;
-      transition: background 0.18s, color 0.18s;
+      box-shadow: 0 0 8px #00ffff;
+      transition: background 0.2s ease-in-out;
     }
-    .repo-btn:hover {
-      background: linear-gradient(90deg, #7ec6ff 0%, #1167b1 100%);
-      color: #fff;
+    .btn-flat:hover {
+      background: #00aaff;
     }
-
-    /* Modal */
-    #modal {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      backdrop-filter: blur(22px);
-      background: rgba(0,0,32,0.7);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      transition: background 0.3s;
-      animation: fadeIn 0.5s;
-    }
-    @keyframes fadeIn {
-      0% { opacity: 0;}
-      100% { opacity: 1;}
-    }
-    #modal-content {
-      background: linear-gradient(135deg, #1167b1 0%, #7ec6ff 100%);
-      border: 2px solid #7ec6ff;
-      border-radius: 22px;
-      padding: 32px 28px;
-      max-width: 680px;
-      max-height: 80vh;
-      overflow: auto;
-      box-shadow: 0 0 32px #7ec6ff, 0 0 0 2px #1167b1 inset;
-      color: white;
-      transform: scale(0.95);
-      transition: all 0.3s ease;
-      position: relative;
-    }
-    #modal.show #modal-content {
-      transform: scale(1);
-    }
-    #modal-close {
-      position: absolute;
-      top: 24px;
-      right: 36px;
-      font-size: 2.2em;
-      cursor: pointer;
-      color: #7ec6ff;
-      z-index: 2;
-      background: none;
-      border: none;
-      padding: 0;
-      line-height: 1;
-      transition: color 0.18s;
-    }
-    #modal-close:hover {
-      color: #1167b1;
-    }
-
-    @media (max-width: 700px) {
-      .fb-profile-header { height: 210px; }
-      #logo { width: 76px; height: 76px; }
-      .fb-profile-info { padding: 8px 10px; gap: 14px; }
-      .fb-profile-name { font-size: 1.1em;}
-      #repos {
-        grid-template-columns: 1fr;
-        gap: 18px;
-        max-width: 98vw;
-        padding: 0 8px;
-      }
-      .repo-card { min-height: 320px; }
-      .repo-img { width: 76px; height: 76px; }
-      #modal-content { padding: 18px 8px; max-width: 95vw;}
+    .repo-icon {
+      width: 48px;
+      height: 48px;
+      margin-right: 10px;
+      object-fit: contain;
     }
   </style>
 </head>
 <body>
-  <div class="fb-profile-header">
-    <img id="banner" src="assets/banner.png" alt="Banner">
-    <div class="fb-profile-info">
-      <img id="logo" src="assets/logo.png" alt="Logo">
-      <div class="fb-profile-details">
-        <div class="fb-profile-name">Jesus Quijada</div>
-        <a href="https://github.com/jesusquijada34" target="_blank">
-          <button class="fb-follow-btn">
-            <svg style="vertical-align:middle;margin-right:6px;" height="20" viewBox="0 0 24 24" width="20" fill="#fff">
-              <path d="M16 11c1.66 0 2.99 1.34 2.99 3L19 19c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2v-5c0-1.66 1.34-3 3-3h8zm-8-3c0-1.66 1.34-3 3-3s3 1.34 3 3-1.34 3-3 3-3-1.34-3-3z"/>
-            </svg>
-            Seguir
-          </button>
-        </a>
-      </div>
-    </div>
+  <div class="banner">
+    <a href="https://github.com/JesusQuijada34" target="_blank">
+      <img src="assets/logo.png" alt="Logo" class="logo-link">
+    </a>
   </div>
 
-  <main>
-    <section id="repos"></section>
-  </main>
-
-  <div id="modal">
-    <button id="modal-close" onclick="toggleModal()">×</button>
-    <div id="modal-content" class="markdown-body"></div>
+  <div class="container py-5">
+    <h2 class="text-center mb-4">🔮 Proyectos de Jesús Quijada</h2>
+    <div id="repoList"></div>
   </div>
 
-<script>
-  // ORB CONFIGURATION
-  const orbColors = [
-    'rgba(17,103,177,0.18)','rgba(126,198,255,0.21)', 'rgba(17,103,177,0.15)',
-    'rgba(126,198,255,0.13)', 'rgba(17,103,177,0.12)', 'rgba(126,198,255,0.11)'
-  ];
-  const orbCount = 16;
-  const orbArray = [];
-  function spawnOrbs() {
-    for (let i = 0; i < orbCount; i++) {
-      const orb = document.createElement('div');
-      orb.className = 'orb interactive';
-      orb.style.width = `${70 + Math.random()*60}px`;
-      orb.style.height = `${70 + Math.random()*60}px`;
-      orb.style.top = `${Math.random()*90}vh`;
-      orb.style.left = `${Math.random()*100}vw`;
-      orb.style.background = orbColors[Math.floor(Math.random()*orbColors.length)];
-      orb.style.animationDelay = `${Math.random()*10}s`;
-      orb.style.zIndex = 0;
-      orb.onclick = function(e) {
-        orb.classList.add('pulse');
-        setTimeout(()=>orb.classList.remove('pulse'), 600);
-        // Interacción: randomizar posición
-        orb.style.top = `${Math.random()*90}vh`;
-        orb.style.left = `${Math.random()*100}vw`;
-      };
-      document.body.appendChild(orb);
-      orbArray.push(orb);
-    }
-  }
-  window.addEventListener('resize', ()=> {
-    orbArray.forEach(orb => {
-      orb.style.top = `${Math.random()*90}vh`;
-      orb.style.left = `${Math.random()*100}vw`;
-    });
-  });
-  spawnOrbs();
+  <script>
+    const rawListURL = "https://raw.githubusercontent.com/JesusQuijada34/catalog/refs/heads/main/repo.list";
+    const repoListEl = document.getElementById('repoList');
 
-  // REPO LIST
-  const repoListURL = 'https://raw.githubusercontent.com/JesusQuijada34/catalog/refs/heads/main/repo.list';
+    fetch(rawListURL)
+      .then(res => res.text())
+      .then(data => {
+        const repos = data.split(',').map(r => r.trim()).filter(r => r.length);
+        repos.forEach(repo => {
+          const card = document.createElement('div');
+          card.className = 'repo-card d-flex align-items-center';
 
-  async function loadRepos() {
-    const repoSection = document.getElementById('repos');
-    repoSection.innerHTML = `<div style='text-align:center;padding:48px 0;color:#7ec6ff;'>Cargando repositorios...</div>`;
-    try {
-      const resList = await fetch(repoListURL);
-      const listText = await resList.text();
-      const repos = listText.split(',').map(r => r.trim()).filter(Boolean);
+          const icon = document.createElement('img');
+          icon.src = `https://raw.githubusercontent.com/JesusQuijada34/${repo}/main/app/app-icon.ico`;
+          icon.alt = `${repo} icon`;
+          icon.className = 'repo-icon';
 
-      let cardsHtml = '';
-      for (const repo of repos) {
-        const readmeURL = `https://raw.githubusercontent.com/JesusQuijada34/${repo}/main/README.md`;
-        const imageURL = `assets/${repo}.png`;
+          const content = document.createElement('div');
+          content.innerHTML = `
+            <h5 class="mb-1">${repo}</h5>
+            <a href="https://github.com/JesusQuijada34/${repo}" class="btn btn-flat btn-sm mt-2" target="_blank">Ver en GitHub</a>
+          `;
 
-        let markdown = '';
-        let title = repo;
-        let desc = '';
-        try {
-          const resReadme = await fetch(readmeURL);
-          if (!resReadme.ok) continue;
-          markdown = await resReadme.text();
-          const titleLine = markdown.split('\n').find(line => line.startsWith('#'));
-          title = titleLine ? titleLine.replace(/^#\s*/, '') : repo;
-          // Get 1st paragraph after title
-          const descLine = markdown.split('\n').find(line => line.trim() && !line.startsWith('#'));
-          desc = descLine ? descLine.replace(/[#*>\-]/g, '').trim() : '';
-        } catch (e) {
-          desc = '';
-        }
-
-        cardsHtml += `
-        <div class="repo-card" tabindex="0" title="Ver detalles de ${title}" onclick="showModal(\`${markdown.replace(/`/g,"\\`")}\`)">
-          <img src="${imageURL}" class="repo-img" alt="Imagen ${repo}" onerror="this.src='assets/logo.png'">
-          <div class="repo-content">
-            <div>
-              <div class="repo-title">${title}</div>
-              <div class="repo-desc">${desc}</div>
-            </div>
-            <div class="repo-buttons">
-              <a href="https://github.com/JesusQuijada34/${repo}" target="_blank" class="repo-btn">GitHub</a>
-              <a href="https://JesusQuijada34.github.io/${repo}" target="_blank" class="repo-btn">Live</a>
-              <a href="https://github.com/JesusQuijada34/${repo}/archive/main.zip" target="_blank" class="repo-btn">ZIP</a>
-            </div>
-          </div>
-        </div>
-        `;
-      }
-      repoSection.innerHTML = cardsHtml || `<div style='text-align:center;padding:48px 0;color:#7ec6ff;'>No se encontraron repositorios.</div>`;
-    } catch (error) {
-      repoSection.innerHTML = `<div style='text-align:center;padding:48px 0;color:red;'>Error cargando la lista de repositorios</div>`;
-    }
-  }
-
-  function showModal(content) {
-    document.getElementById('modal-content').innerHTML = marked.parse(content);
-    document.getElementById('modal').style.display = 'flex';
-    document.getElementById('modal').classList.add('show');
-    document.body.style.overflow = 'hidden';
-  }
-  function toggleModal() {
-    document.getElementById('modal').style.display = 'none';
-    document.getElementById('modal').classList.remove('show');
-    document.body.style.overflow = '';
-  }
-  document.addEventListener('keydown', function(e){
-    if(e.key === "Escape") toggleModal();
-  });
-  document.getElementById('modal').addEventListener('click', function(e){
-    if (e.target === this) toggleModal();
-  });
-
-  loadRepos();
-</script>
+          card.appendChild(icon);
+          card.appendChild(content);
+          repoListEl.appendChild(card);
+        });
+      })
+      .catch(err => {
+        repoListEl.innerHTML = "<p>🚫 No se pudo cargar la lista de repositorios.</p>";
+        console.error(err);
+      });
+  </script>
 </body>
 </html>
+
