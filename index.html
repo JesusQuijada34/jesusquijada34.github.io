@@ -52,10 +52,12 @@
       margin-bottom: 1rem;
       backdrop-filter: blur(10px);
       transition: all 0.3s ease-in-out;
+      cursor: pointer;
     }
     .repo-card:hover {
       box-shadow: 0 0 15px #00ffff;
       transform: scale(1.02);
+      background-color: rgba(0,255,255,0.11);
     }
     .btn-flat {
       border-radius: 0;
@@ -64,6 +66,7 @@
       border: none;
       box-shadow: 0 0 8px #00ffff;
       transition: background 0.2s ease-in-out;
+      margin-right: 10px;
     }
     .btn-flat:hover {
       background: #00aaff;
@@ -73,6 +76,11 @@
       height: 48px;
       margin-right: 10px;
       object-fit: contain;
+    }
+    .repo-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 4px;
     }
     .main-footer {
       width: 100%;
@@ -116,11 +124,29 @@
     const rawListURL = "https://raw.githubusercontent.com/JesusQuijada34/catalog/refs/heads/main/repo.list";
     const repoListEl = document.getElementById('repoList');
 
+    // Función para obtener el <name> de details.xml de cada repo
+    async function getRepoName(repo) {
+      try {
+        const detailsUrl = `https://raw.githubusercontent.com/JesusQuijada34/${repo}/refs/heads/main/details.xml`;
+        const res = await fetch(detailsUrl);
+        if (!res.ok) return repo; // fallback al nombre del repo
+        const xmlText = await res.text();
+        const match = xmlText.match(/<name>([^<]+)<\/name>/i);
+        return match ? match[1].trim() : repo;
+      } catch {
+        return repo;
+      }
+    }
+
     fetch(rawListURL)
       .then(res => res.text())
-      .then(data => {
+      .then(async data => {
         const repos = data.split(',').map(r => r.trim()).filter(r => r.length);
-        repos.forEach(repo => {
+
+        // Cargar nombres desde details.xml en paralelo
+        const repoNames = await Promise.all(repos.map(getRepoName));
+
+        repos.forEach((repo, i) => {
           const card = document.createElement('div');
           card.className = 'repo-card d-flex align-items-center';
 
@@ -131,12 +157,21 @@
 
           const content = document.createElement('div');
           content.innerHTML = `
-            <h5 class="mb-1">${repo}</h5>
+            <div class="repo-title">${repoNames[i]}</div>
             <a href="https://github.com/JesusQuijada34/${repo}" class="btn btn-flat btn-sm mt-2" target="_blank">Ver en GitHub</a>
+            <button class="btn btn-flat btn-sm mt-2" onclick="event.stopPropagation(); descargarRepo('${repo}');">Descargar ZIP</button>
           `;
 
           card.appendChild(icon);
           card.appendChild(content);
+
+          // Descargar ZIP al hacer clic en la card
+          card.addEventListener('click', function(e) {
+            // Ignora si el click viene de los botones internos
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') return;
+            descargarRepo(repo);
+          });
+
           repoListEl.appendChild(card);
         });
       })
@@ -144,6 +179,12 @@
         repoListEl.innerHTML = "<p>🚫 No se pudo cargar la lista de repositorios.</p>";
         console.error(err);
       });
+
+    // Descargar ZIP del repo
+    function descargarRepo(repo) {
+      const zipUrl = `https://github.com/JesusQuijada34/${repo}/archive/refs/heads/main.zip`;
+      window.location.href = zipUrl;
+    }
   </script>
 
   <!-- Footer -->
