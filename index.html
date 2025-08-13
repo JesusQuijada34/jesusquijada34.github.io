@@ -3,481 +3,322 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" href="assets/logo.png" type="image/png">
-  <title>Jesús Quijada | Portfolio Interactivo</title>
+  <title>Jesús Quijada | Proyectos</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #00ffff;
-      --secondary: #FFD700;
-      --accent: #FF6EC4;
-      --dark-bg: #0f0c29;
-      --card-bg: rgba(15, 12, 41, 0.8);
-      --success: #00ff88;
+      --primary: #4285f4;
+      --secondary: #34a853;
+      --accent: #ea4335;
+      --text-primary: #202124;
+      --text-secondary: #5f6368;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8f9fa;
+      --card-bg: #ffffff;
+      --border-color: #dadce0;
+      --star-color: #fbbc04;
     }
-    
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary: #8ab4f8;
+        --secondary: #81c995;
+        --accent: #f28b82;
+        --text-primary: #e8eaed;
+        --text-secondary: #9aa0a6;
+        --bg-primary: #202124;
+        --bg-secondary: #2d2e30;
+        --card-bg: #2d2e30;
+        --border-color: #3c4043;
+        --star-color: #fbbc04;
+      }
     }
-    
+
     body {
-      background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a1a2e);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      color: #fff;
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Roboto', 'Segoe UI', system-ui, sans-serif;
       margin: 0;
       padding: 0;
-    }
-    
-    /* Header minimalista */
-    .main-header {
-      padding: 20px 0;
-      position: relative;
-      z-index: 10;
-    }
-    
-    .logo-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    
-    .logo-img {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--primary);
-      box-shadow: 0 0 20px var(--primary), 
-                  0 0 30px var(--secondary),
-                  0 0 40px var(--accent);
-      transition: all 0.5s ease;
-    }
-    
-    .logo-img:hover {
-      transform: rotate(15deg) scale(1.1);
-      box-shadow: 0 0 30px var(--primary), 
-                  0 0 40px var(--secondary),
-                  0 0 50px var(--accent);
-    }
-    
-    /* Barra de búsqueda futurista */
-    .search-container {
-      max-width: 800px;
-      margin: 30px auto;
-      position: relative;
-      padding: 0 15px;
-    }
-    
-    .search-input {
-      width: 100%;
-      padding: 15px 25px;
-      border-radius: 50px;
-      border: none;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      color: white;
-      font-size: 1.1rem;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-      border: 1px solid rgba(0, 255, 255, 0.3);
-      transition: all 0.4s ease;
-      padding-right: 60px;
-    }
-    
-    .search-input:focus {
-      outline: none;
-      box-shadow: 0 0 30px var(--primary);
-      background: rgba(255, 255, 255, 0.15);
-    }
-    
-    .search-icon {
-      position: absolute;
-      right: 30px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--primary);
-      font-size: 1.3rem;
       transition: all 0.3s ease;
     }
-    
-    .search-input:focus + .search-icon {
-      color: var(--accent);
-      transform: translateY(-50%) scale(1.1);
-    }
-    
-    /* Contenedor principal */
-    .main-container {
-      max-width: 1400px;
+
+    .container {
+      max-width: 1200px;
       margin: 0 auto;
       padding: 0 15px;
     }
-    
-    /* Grid de proyectos */
-    .repo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 25px;
-      padding: 20px 0;
-    }
-    
-    /* Tarjetas de proyectos con animaciones */
-    .repo-card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      position: relative;
-      border: 1px solid rgba(0, 255, 255, 0.2);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      cursor: pointer;
-      backdrop-filter: blur(5px);
-      transform: translateY(0);
-      opacity: 0;
-      animation: cardEntrance 0.6s ease-out forwards;
-    }
-    
-    @keyframes cardEntrance {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .repo-card::before {
-      content: '';
-      position: absolute;
+
+    /* Header */
+    .app-header {
+      background-color: var(--bg-primary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 15px 0;
+      position: sticky;
       top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--secondary), var(--accent), var(--primary));
-      z-index: 2;
+      z-index: 100;
     }
-    
-    .repo-card:hover {
-      transform: translateY(-10px) scale(1.03);
-      box-shadow: 0 15px 35px rgba(0, 255, 255, 0.4),
-                  0 5px 15px rgba(255, 215, 0, 0.3);
-      border: 1px solid var(--primary);
-      z-index: 5;
+
+    .header-title {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin: 0;
+      color: var(--text-primary);
     }
-    
-    .repo-card:hover .repo-image {
-      transform: scale(1.05);
+
+    /* Secciones */
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin: 25px 0 15px;
+      color: var(--text-primary);
     }
-    
-    .repo-image-container {
-      width: 100%;
-      height: 180px;
+
+    /* Grid de tarjetas */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    @media (max-width: 600px) {
+      .apps-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+    }
+
+    /* Tarjetas de apps */
+    .app-card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
       overflow: hidden;
-      position: relative;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
     }
-    
-    .repo-image {
+
+    .app-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .app-image-container {
+      position: relative;
+      width: 100%;
+      height: 100px;
+      overflow: hidden;
+    }
+
+    .app-image {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: all 0.5s ease;
+      transition: transform 0.3s ease;
     }
-    
-    .live-badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: var(--success);
-      color: black;
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: bold;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-      z-index: 3;
-      animation: pulse 2s infinite;
-    }
-    
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-    
-    .repo-content {
-      padding: 20px;
-    }
-    
-    .repo-title {
-      font-size: 1.3rem;
-      font-weight: bold;
-      margin-bottom: 10px;
-      color: white;
-      display: flex;
-      align-items: center;
-    }
-    
-    .repo-icon {
-      width: 36px;
-      height: 36px;
-      margin-right: 10px;
-      border-radius: 8px;
-      object-fit: contain;
-    }
-    
-    .repo-rating {
-      display: flex;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-    
-    .stars {
-      color: var(--secondary);
-      margin-right: 10px;
-    }
-    
-    .rating-value {
-      background: rgba(255, 215, 0, 0.2);
-      padding: 3px 8px;
-      border-radius: 10px;
-      font-size: 0.8rem;
-    }
-    
-    .repo-buttons {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    
-    .btn-main {
-      flex: 1;
-      border: none;
-      border-radius: 8px;
-      padding: 10px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-    
-    .btn-download {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      color: black;
-    }
-    
-    .btn-download:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
-    }
-    
-    .btn-live {
-      background: linear-gradient(135deg, var(--success), #00cc77);
-      color: black;
-    }
-    
-    .btn-live:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4);
-    }
-    
-    .btn-github {
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-    
-    .btn-github:hover {
-      background: rgba(255, 255, 255, 0.2);
-      color: var(--secondary);
-    }
-    
-    .btn-icon {
-      margin-right: 6px;
-    }
-    
-    /* Footer mejorado */
-    .main-footer {
+
+    .app-image-blurred {
       width: 100%;
-      background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
-      color: #fff;
-      padding: 30px 0;
-      text-align: center;
-      margin-top: 80px;
-      position: relative;
+      height: 100%;
+      object-fit: cover;
+      filter: blur(4px);
+      transform: scale(1.1);
     }
-    
-    .main-footer::before {
-      content: '';
+
+    .app-icon-fallback {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), var(--accent), transparent);
-    }
-    
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-bottom: 15px;
-    }
-    
-    .footer-link {
-      color: var(--secondary);
-      font-weight: bold;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-    }
-    
-    .footer-link:hover {
-      color: var(--primary);
-      text-shadow: 0 0 10px var(--primary);
-    }
-    
-    .footer-link i {
-      margin-right: 8px;
-    }
-    
-    .copyright {
-      margin-top: 15px;
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 0.9rem;
-    }
-    
-    /* Mensaje de carga */
-    .loading-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 300px;
-      flex-direction: column;
-    }
-    
-    .spinner {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       width: 50px;
       height: 50px;
-      border: 5px solid rgba(0, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: var(--primary);
-      animation: spin 1s ease-in-out infinite;
-      margin-bottom: 20px;
+      border-radius: 12px;
+      background-color: rgba(255,255,255,0.2);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
     }
-    
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+
+    .app-content {
+      padding: 12px;
     }
-    
-    /* Mensaje de error */
-    .error-container {
-      text-align: center;
-      padding: 40px 20px;
+
+    .app-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin: 0 0 4px;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    
-    .error-icon {
-      font-size: 3rem;
-      color: var(--accent);
-      margin-bottom: 20px;
+
+    .app-category {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin: 0 0 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    
-    /* No results message */
-    .no-results {
-      text-align: center;
-      grid-column: 1 / -1;
-      padding: 40px 20px;
-      opacity: 0;
-      animation: fadeIn 0.5s ease-out forwards;
+
+    .app-rating {
+      display: flex;
+      align-items: center;
     }
-    
-    @keyframes fadeIn {
-      to { opacity: 1; }
+
+    .stars {
+      color: var(--star-color);
+      font-size: 0.8rem;
+      margin-right: 5px;
     }
-    
-    /* Responsive design */
-    @media (max-width: 768px) {
-      .repo-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      }
-      
-      .logo-img {
-        width: 60px;
-        height: 60px;
-      }
-      
-      .repo-image-container {
-        height: 150px;
-      }
+
+    .rating-value {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
     }
-    
-    @media (max-width: 480px) {
-      .repo-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .search-input {
-        padding: 12px 20px;
-        font-size: 1rem;
-      }
-      
-      .search-icon {
-        right: 25px;
-        font-size: 1.1rem;
-      }
-      
-      .repo-buttons {
-        flex-direction: column;
-      }
-      
-      .btn-main {
-        width: 100%;
-      }
+
+    /* Tablas de rankings */
+    .ranking-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+
+    .ranking-table th {
+      text-align: left;
+      padding: 12px 0;
+      font-weight: 500;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .ranking-table td {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: middle;
+    }
+
+    .ranking-app {
+      display: flex;
+      align-items: center;
+    }
+
+    .ranking-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      margin-right: 12px;
+      object-fit: cover;
+    }
+
+    .ranking-title {
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .ranking-category {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    /* Footer */
+    .app-footer {
+      background-color: var(--bg-secondary);
+      padding: 20px 0;
+      margin-top: 40px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .copyright {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      margin-left: 15px;
+      font-size: 0.8rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
     }
   </style>
 </head>
 <body>
-  <!-- Header minimalista -->
-  <header class="main-header">
-    <div class="logo-container">
-      <img src="assets/logo.png" alt="Logo" class="logo-img">
+  <!-- Header -->
+  <header class="app-header">
+    <div class="container">
+      <h1 class="header-title">Proyectos de Jesús Quijada</h1>
     </div>
   </header>
 
-  <!-- Barra de búsqueda -->
-  <div class="search-container">
-    <input type="text" class="search-input" placeholder="Buscar proyectos..." id="searchInput">
-    <i class="fas fa-search search-icon"></i>
-  </div>
+  <!-- Contenido principal -->
+  <main class="container">
+    <h2 class="section-title">🔮 Recomendados para ti</h2>
+    <div id="featuredApps" class="apps-grid"></div>
 
-  <!-- Contenedor principal -->
-  <div class="main-container">
-    <h2 class="text-center mb-5" style="font-weight: 800; text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);">
-      <i class="fas fa-rocket" style="color: var(--accent);"></i> Proyectos Destacados
-    </h2>
-    
-    <div id="repoList" class="repo-grid">
-      <div class="loading-container">
-        <div class="spinner"></div>
-        <p>Cargando proyectos...</p>
+    <h2 class="section-title">🏆 Listas de éxitos</h2>
+    <table class="ranking-table">
+      <thead>
+        <tr>
+          <th>Más exitosos (gratuitos)</th>
+          <th>De mayor recaudación</th>
+          <th>Más exitosos (pagados)</th>
+        </tr>
+      </thead>
+      <tbody id="topApps"></tbody>
+    </table>
+
+    <h2 class="section-title">🎮 Todos los proyectos</h2>
+    <div id="allApps" class="apps-grid"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="container footer-content">
+      <div class="copyright">© 2025 Jesús Quijada. Todos los derechos reservados.</div>
+      <div class="footer-links">
+        <a href="https://github.com/JesusQuijada34" target="_blank">GitHub</a>
+        <a href="https://t.me/MkelCT" target="_blank">Admin</a>
+        <a href="https://t.me/JesusQuijada34" target="_blank">Desarrollador</a>
       </div>
     </div>
-  </div>
+  </footer>
 
   <script>
     const rawListURL = "https://raw.githubusercontent.com/JesusQuijada34/catalog/refs/heads/main/repo.list";
-    const repoListEl = document.getElementById('repoList');
-    const searchInput = document.getElementById('searchInput');
+    const featuredAppsEl = document.getElementById('featuredApps');
+    const allAppsEl = document.getElementById('allApps');
+    const topAppsEl = document.getElementById('topApps');
     let allRepos = [];
 
-    // Función para obtener detalles del repo desde details.xml
+    // Función para verificar si existe splash.png
+    async function checkSplashImage(repoName) {
+      try {
+        const splashUrl = `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/assets/splash.png`;
+        const res = await fetch(splashUrl, { method: 'HEAD' });
+        return res.ok ? splashUrl : null;
+      } catch {
+        return null;
+      }
+    }
+
+    // Función para obtener detalles del repo
     async function getRepoDetails(repoName) {
       try {
         const detailsUrl = `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/refs/heads/main/details.xml`;
@@ -486,10 +327,9 @@
         if (!res.ok) {
           return {
             name: repoName,
-            description: 'Descripción no disponible',
-            rating: '0',
-            hasLive: false,
-            image: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`
+            category: 'Aplicación',
+            rating: '4.0',
+            icon: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`
           };
         }
         
@@ -497,33 +337,20 @@
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(xmlText, "text/xml");
         
-        // Verificar si existe versión live
-        let hasLive = false;
-        try {
-          const liveRes = await fetch(`https://jesusquijada34.github.io/${repoName}/`);
-          hasLive = liveRes.ok;
-        } catch (e) {
-          hasLive = false;
-        }
-        
         return {
-          repoName,
           name: xmlDoc.querySelector('name')?.textContent?.trim() || repoName,
-          description: xmlDoc.querySelector('description')?.textContent?.trim() || 'Descripción no disponible',
-          rating: xmlDoc.querySelector('rate')?.textContent?.trim() || '0',
-          hasLive,
-          image: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/screenshot.png` || 
-                 `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`
+          category: xmlDoc.querySelector('category')?.textContent?.trim() || 'Aplicación',
+          rating: xmlDoc.querySelector('rate')?.textContent?.trim() || '4.0',
+          icon: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`,
+          splash: await checkSplashImage(repoName)
         };
-      } catch (error) {
-        console.error(`Error cargando ${repoName}:`, error);
+      } catch {
         return {
-          repoName,
           name: repoName,
-          description: 'Descripción no disponible',
-          rating: '0',
-          hasLive: false,
-          image: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`
+          category: 'Aplicación',
+          rating: '4.0',
+          icon: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`,
+          splash: null
         };
       }
     }
@@ -537,17 +364,14 @@
       
       let starsHTML = '';
       
-      // Estrellas llenas
       for (let i = 0; i < fullStars; i++) {
         starsHTML += '<i class="fas fa-star"></i>';
       }
       
-      // Media estrella
       if (hasHalfStar) {
         starsHTML += '<i class="fas fa-star-half-alt"></i>';
       }
       
-      // Estrellas vacías
       for (let i = 0; i < emptyStars; i++) {
         starsHTML += '<i class="far fa-star"></i>';
       }
@@ -555,171 +379,123 @@
       return starsHTML;
     }
 
-    // Función para renderizar repos
-    function renderRepos(repos) {
-      if (repos.length === 0) {
-        repoListEl.innerHTML = `
-          <div class="no-results">
-            <i class="fas fa-search fa-3x mb-3" style="color: var(--accent);"></i>
-            <h3>No se encontraron proyectos</h3>
-            <p>Intenta con otros términos de búsqueda</p>
-          </div>
-        `;
-        return;
-      }
+    // Función para crear tarjeta de app
+    function createAppCard(repo) {
+      const card = document.createElement('div');
+      card.className = 'app-card';
       
-      repoListEl.innerHTML = '';
-      
-      repos.forEach((repo, index) => {
-        const card = document.createElement('div');
-        card.className = 'repo-card';
-        card.style.animationDelay = `${index * 0.1}s`;
-        
-        // Intentar usar screenshot.png, si no existe usar el ícono
-        const imageUrl = repo.image.includes('screenshot.png') ? 
-                         repo.image : 
-                         `https://raw.githubusercontent.com/JesusQuijada34/${repo.repoName}/main/app/app-icon.ico`;
-        
-        card.innerHTML = `
-          <div class="repo-image-container">
-            <img src="${imageUrl}" alt="${repo.name}" class="repo-image" 
-                 onerror="this.src='https://raw.githubusercontent.com/JesusQuijada34/${repo.repoName}/main/app/app-icon.ico'">
-            ${repo.hasLive ? '<div class="live-badge"><i class="fas fa-bolt"></i> LIVE</div>' : ''}
-          </div>
-          <div class="repo-content">
-            <div class="repo-title">
-              <img src="https://raw.githubusercontent.com/JesusQuijada34/${repo.repoName}/main/app/app-icon.ico" 
-                   alt="Icon" class="repo-icon" onerror="this.src='https://via.placeholder.com/36'">
-              ${repo.name}
-            </div>
-            <div class="repo-rating">
-              <div class="stars">${renderStars(repo.rating)}</div>
-              <div class="rating-value">${repo.rating}/5</div>
-            </div>
-            <div class="repo-buttons">
-              ${repo.hasLive ? `
-                <a href="https://jesusquijada34.github.io/${repo.repoName}/" 
-                   class="btn-main btn-live" target="_blank">
-                  <i class="fas fa-external-link-alt btn-icon"></i> Ver Live
-                </a>
-              ` : ''}
-              <button class="btn-main btn-download" onclick="event.stopPropagation(); descargarRepo('${repo.repoName}');">
-                <i class="fas fa-download btn-icon"></i> Descargar
-              </button>
-              <a href="https://github.com/JesusQuijada34/${repo.repoName}" 
-                 class="btn-main btn-github" target="_blank">
-                <i class="fab fa-github btn-icon"></i> GitHub
-              </a>
-            </div>
-          </div>
-        `;
-        
-        card.addEventListener('click', function() {
-          if (repo.hasLive) {
-            window.open(`https://jesusquijada34.github.io/${repo.repoName}/`, '_blank');
-          } else {
-            descargarRepo(repo.repoName);
+      card.innerHTML = `
+        <div class="app-image-container">
+          ${repo.splash ? 
+            `<img src="${repo.splash}" alt="${repo.name}" class="app-image">` : 
+            `<img src="${repo.icon}" alt="${repo.name}" class="app-image-blurred">
+             <div class="app-icon-fallback">
+               <i class="fas fa-box"></i>
+             </div>`
           }
-        });
-        
-        repoListEl.appendChild(card);
+        </div>
+        <div class="app-content">
+          <h3 class="app-title">${repo.name}</h3>
+          <p class="app-category">${repo.category}</p>
+          <div class="app-rating">
+            <div class="stars">${renderStars(repo.rating)}</div>
+            <div class="rating-value">${repo.rating}</div>
+          </div>
+        </div>
+      `;
+      
+      card.addEventListener('click', () => {
+        window.open(`https://github.com/JesusQuijada34/${repo.repoName}`, '_blank');
       });
+      
+      return card;
     }
 
-    // Función para filtrar repos
-    function filterRepos() {
-      const searchTerm = searchInput.value.toLowerCase();
-      const filtered = allRepos.filter(repo => 
-        repo.name.toLowerCase().includes(searchTerm) || 
-        repo.description.toLowerCase().includes(searchTerm) ||
-        repo.repoName.toLowerCase().includes(searchTerm)
-      );
-      renderRepos(filtered);
+    // Función para crear fila de ranking
+    function createRankingRow(repos) {
+      const row = document.createElement('tr');
+      
+      row.innerHTML = `
+        <td>
+          ${repos[0] ? createRankingApp(repos[0]) : ''}
+        </td>
+        <td>
+          ${repos[1] ? createRankingApp(repos[1]) : ''}
+        </td>
+        <td>
+          ${repos[2] ? createRankingApp(repos[2]) : ''}
+        </td>
+      `;
+      
+      return row;
+    }
+
+    function createRankingApp(repo) {
+      return `
+        <div class="ranking-app">
+          <img src="${repo.icon}" alt="${repo.name}" class="ranking-icon">
+          <div>
+            <div class="ranking-title">${repo.name}</div>
+            <div class="ranking-category">${repo.category}</div>
+            <div class="app-rating">
+              <div class="stars">${renderStars(repo.rating)}</div>
+              <div class="rating-value">${repo.rating}</div>
+            </div>
+          </div>
+        </div>
+      `;
     }
 
     // Cargar repositorios
     async function loadRepos() {
       try {
         const response = await fetch(rawListURL);
-        if (!response.ok) throw new Error('No se pudo cargar la lista de repositorios');
-        
         const data = await response.text();
         const repos = data.split(',').map(r => r.trim()).filter(r => r.length);
         
-        // Mostrar estado de carga
-        repoListEl.innerHTML = `
-          <div class="loading-container">
-            <div class="spinner"></div>
-            <p>Cargando ${repos.length} proyectos...</p>
-          </div>
-        `;
-        
-        // Cargar detalles en paralelo con chunks para mejor performance
-        const chunkSize = 5;
-        const repoDetails = [];
-        
-        for (let i = 0; i < repos.length; i += chunkSize) {
-          const chunk = repos.slice(i, i + chunkSize);
-          const details = await Promise.all(chunk.map(getRepoDetails));
-          repoDetails.push(...details);
-          
-          // Actualizar progreso
-          if (repoListEl.querySelector('.loading-container')) {
-            repoListEl.querySelector('.loading-container p').textContent = 
-              `Cargando ${i + chunk.length} de ${repos.length} proyectos...`;
-          }
-        }
+        // Cargar detalles en paralelo
+        const repoDetails = await Promise.all(
+          repos.map(async repoName => {
+            const details = await getRepoDetails(repoName);
+            return { ...details, repoName };
+          })
+        );
         
         allRepos = repoDetails.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
-        renderRepos(allRepos);
         
-        // Configurar búsqueda
-        searchInput.addEventListener('input', filterRepos);
+        // Mostrar 6 destacados
+        const featured = allRepos.slice(0, 6);
+        featured.forEach(repo => {
+          featuredAppsEl.appendChild(createAppCard(repo));
+        });
+        
+        // Mostrar top 3 para la tabla
+        const topFree = [allRepos[0], allRepos[3], allRepos[5]];
+        const topGrossing = [allRepos[1], allRepos[4], allRepos[7]];
+        const topPaid = [allRepos[2], allRepos[6], allRepos[8]];
+        
+        // Crear filas para la tabla
+        for (let i = 0; i < 3; i++) {
+          const row = createRankingRow([
+            topFree[i], 
+            topGrossing[i], 
+            topPaid[i]
+          ]);
+          topAppsEl.appendChild(row);
+        }
+        
+        // Mostrar todos los proyectos
+        allRepos.forEach(repo => {
+          allAppsEl.appendChild(createAppCard(repo));
+        });
       } catch (err) {
-        console.error('Error:', err);
-        repoListEl.innerHTML = `
-          <div class="error-container">
-            <div class="error-icon">
-              <i class="fas fa-exclamation-triangle"></i>
-            </div>
-            <h3>Error al cargar los proyectos</h3>
-            <p>${err.message}</p>
-            <button class="btn-main btn-download mt-3" onclick="location.reload()">
-              <i class="fas fa-sync-alt btn-icon"></i> Intentar de nuevo
-            </button>
-          </div>
-        `;
+        console.error('Error loading repos:', err);
+        featuredAppsEl.innerHTML = '<p>Error al cargar los proyectos</p>';
       }
     }
 
-    // Descargar ZIP del repo
-    function descargarRepo(repo) {
-      const zipUrl = `https://github.com/JesusQuijada34/${repo}/archive/refs/heads/main.zip`;
-      window.open(zipUrl, '_blank');
-    }
-
-    // Iniciar carga cuando el DOM esté listo
+    // Iniciar carga
     document.addEventListener('DOMContentLoaded', loadRepos);
   </script>
-
-  <!-- Footer -->
-  <footer class="main-footer">
-    <div class="container">
-      <div class="footer-links">
-        <a href="https://github.com/JesusQuijada34" class="footer-link" target="_blank">
-          <i class="fab fa-github"></i> Plataforma
-        </a>
-        <a href="https://t.me/MkelCT" class="footer-link" target="_blank">
-          <i class="fab fa-telegram"></i> Admin
-        </a>
-        <a href="https://t.me/JesusQuijada34" class="footer-link" target="_blank">
-          <i class="fab fa-telegram"></i> Desarrollador
-        </a>
-      </div>
-      <div class="copyright">
-        &copy; 2025 Jesús Quijada. Todos los derechos reservados.
-      </div>
-    </div>
-  </footer>
 </body>
 </html>
