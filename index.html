@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" href="assets/logo.png" type="image/png">
-  <title>Jesús Quijada | PlayStore TV Style</title>
+  <title>Jesús Quijada | Portfolio Interactivo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,138 +13,139 @@
       --secondary: #FFD700;
       --accent: #FF6EC4;
       --dark-bg: #0f0c29;
-      --card-bg: rgba(15, 12, 41, 0.7);
+      --card-bg: rgba(15, 12, 41, 0.8);
+      --success: #00ff88;
+    }
+    
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     
     body {
-      background: radial-gradient(circle at top left, var(--dark-bg), #302b63, #24243e);
+      background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a1a2e);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
       color: #fff;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', system-ui, sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
+      margin: 0;
+      padding: 0;
     }
     
-    /* Banner mejorado con efecto neón */
-    .banner {
-      width: 100%;
-      height: 300px;
-      background-image: url('assets/banner.png');
-      background-size: cover;
-      background-position: center;
+    /* Header minimalista */
+    .main-header {
+      padding: 20px 0;
       position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      border-bottom: 2px solid var(--primary);
+      z-index: 10;
     }
     
-    .banner::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      right: 0;
-      height: 10px;
-      background: linear-gradient(90deg, 
-        transparent, 
-        var(--primary), 
-        var(--secondary), 
-        var(--accent), 
-        transparent);
-      filter: blur(5px);
-      opacity: 0.7;
-    }
-    
-    .logo-gradient {
-      position: absolute;
-      left: 50%;
-      bottom: -60px;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, var(--secondary) 20%, var(--accent) 60%, var(--primary) 100%);
-      border-radius: 50%;
-      padding: 15px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.5), 
-                  0 0 20px var(--secondary),
-                  0 0 30px var(--accent),
-                  0 0 40px var(--primary);
+    .logo-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 10;
-      animation: pulse 4s infinite alternate;
-    }
-    
-    @keyframes pulse {
-      0% { box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 0 20px var(--secondary), 0 0 30px var(--accent), 0 0 40px var(--primary); }
-      50% { box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 0 30px var(--secondary), 0 0 40px var(--accent), 0 0 50px var(--primary); }
-      100% { box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 0 20px var(--secondary), 0 0 30px var(--accent), 0 0 40px var(--primary); }
+      margin-bottom: 20px;
     }
     
     .logo-img {
-      width: 100px;
-      height: 100px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
-      background: white;
-      box-shadow: 0 1px 8px rgba(0,0,0,0.2);
-      border: 2px solid white;
+      object-fit: cover;
+      border: 2px solid var(--primary);
+      box-shadow: 0 0 20px var(--primary), 
+                  0 0 30px var(--secondary),
+                  0 0 40px var(--accent);
+      transition: all 0.5s ease;
     }
     
-    /* Barra de búsqueda estilo TV */
+    .logo-img:hover {
+      transform: rotate(15deg) scale(1.1);
+      box-shadow: 0 0 30px var(--primary), 
+                  0 0 40px var(--secondary),
+                  0 0 50px var(--accent);
+    }
+    
+    /* Barra de búsqueda futurista */
     .search-container {
       max-width: 800px;
-      margin: 80px auto 40px;
+      margin: 30px auto;
       position: relative;
+      padding: 0 15px;
     }
     
     .search-input {
       width: 100%;
-      padding: 15px 20px;
+      padding: 15px 25px;
       border-radius: 50px;
       border: none;
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
       color: white;
       font-size: 1.1rem;
-      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
       border: 1px solid rgba(0, 255, 255, 0.3);
-      transition: all 0.3s ease;
+      transition: all 0.4s ease;
+      padding-right: 60px;
     }
     
     .search-input:focus {
       outline: none;
-      box-shadow: 0 0 25px var(--primary);
+      box-shadow: 0 0 30px var(--primary);
       background: rgba(255, 255, 255, 0.15);
     }
     
     .search-icon {
       position: absolute;
-      right: 20px;
+      right: 30px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--primary);
-      font-size: 1.2rem;
+      font-size: 1.3rem;
+      transition: all 0.3s ease;
     }
     
-    /* Tarjetas estilo PlayStore TV */
+    .search-input:focus + .search-icon {
+      color: var(--accent);
+      transform: translateY(-50%) scale(1.1);
+    }
+    
+    /* Contenedor principal */
+    .main-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    /* Grid de proyectos */
     .repo-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 25px;
-      padding: 20px;
-      max-width: 1400px;
-      margin: 0 auto;
+      padding: 20px 0;
     }
     
+    /* Tarjetas de proyectos con animaciones */
     .repo-card {
       background: var(--card-bg);
       border-radius: 16px;
       overflow: hidden;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
       border: 1px solid rgba(0, 255, 255, 0.2);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
       cursor: pointer;
+      backdrop-filter: blur(5px);
+      transform: translateY(0);
+      opacity: 0;
+      animation: cardEntrance 0.6s ease-out forwards;
+    }
+    
+    @keyframes cardEntrance {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     
     .repo-card::before {
@@ -155,37 +156,54 @@
       right: 0;
       height: 3px;
       background: linear-gradient(90deg, var(--secondary), var(--accent), var(--primary));
+      z-index: 2;
     }
     
     .repo-card:hover {
       transform: translateY(-10px) scale(1.03);
-      box-shadow: 0 15px 35px rgba(0, 255, 255, 0.4);
+      box-shadow: 0 15px 35px rgba(0, 255, 255, 0.4),
+                  0 5px 15px rgba(255, 215, 0, 0.3);
       border: 1px solid var(--primary);
+      z-index: 5;
     }
     
-    .repo-card:hover::after {
-      opacity: 1;
+    .repo-card:hover .repo-image {
+      transform: scale(1.05);
     }
     
-    .repo-card::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 16px;
-      background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 215, 0, 0.1), rgba(255, 110, 196, 0.1));
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
+    .repo-image-container {
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      position: relative;
     }
     
     .repo-image {
       width: 100%;
-      height: 180px;
+      height: 100%;
       object-fit: cover;
-      border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+      transition: all 0.5s ease;
+    }
+    
+    .live-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--success);
+      color: black;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      z-index: 3;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
     }
     
     .repo-content {
@@ -202,60 +220,85 @@
     }
     
     .repo-icon {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       margin-right: 10px;
       border-radius: 8px;
+      object-fit: contain;
     }
     
-    .repo-description {
-      color: rgba(255, 255, 255, 0.7);
+    .repo-rating {
+      display: flex;
+      align-items: center;
       margin-bottom: 15px;
-      font-size: 0.9rem;
-      min-height: 40px;
+    }
+    
+    .stars {
+      color: var(--secondary);
+      margin-right: 10px;
+    }
+    
+    .rating-value {
+      background: rgba(255, 215, 0, 0.2);
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-size: 0.8rem;
     }
     
     .repo-buttons {
       display: flex;
       justify-content: space-between;
+      gap: 10px;
+    }
+    
+    .btn-main {
+      flex: 1;
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-align: center;
+      font-size: 0.9rem;
     }
     
     .btn-download {
       background: linear-gradient(135deg, var(--primary), var(--accent));
       color: black;
-      border: none;
-      border-radius: 8px;
-      padding: 8px 15px;
-      font-weight: bold;
-      flex: 1;
-      margin-right: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
     }
     
     .btn-download:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
       box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
     }
     
-    .btn-download i {
-      margin-right: 5px;
+    .btn-live {
+      background: linear-gradient(135deg, var(--success), #00cc77);
+      color: black;
+    }
+    
+    .btn-live:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4);
     }
     
     .btn-github {
       background: rgba(255, 255, 255, 0.1);
       color: white;
       border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 8px;
-      padding: 8px 15px;
-      transition: all 0.3s ease;
     }
     
     .btn-github:hover {
       background: rgba(255, 255, 255, 0.2);
       color: var(--secondary);
+    }
+    
+    .btn-icon {
+      margin-right: 6px;
     }
     
     /* Footer mejorado */
@@ -266,7 +309,6 @@
       padding: 30px 0;
       text-align: center;
       margin-top: 80px;
-      font-size: 1rem;
       position: relative;
     }
     
@@ -280,77 +322,90 @@
       background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), var(--accent), transparent);
     }
     
-    .main-footer a {
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    
+    .footer-link {
       color: var(--secondary);
       font-weight: bold;
       text-decoration: none;
-      margin: 0 15px;
       transition: all 0.3s ease;
-      position: relative;
+      display: inline-flex;
+      align-items: center;
     }
     
-    .main-footer a:hover {
+    .footer-link:hover {
       color: var(--primary);
       text-shadow: 0 0 10px var(--primary);
     }
     
-    .main-footer a::after {
-      content: '•';
-      position: absolute;
-      right: -18px;
-      color: var(--accent);
-    }
-    
-    .main-footer a:last-child::after {
-      display: none;
+    .footer-link i {
+      margin-right: 8px;
     }
     
     .copyright {
       margin-top: 15px;
       color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
     }
     
-    /* Efectos de carga */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Mensaje de carga */
+    .loading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 300px;
+      flex-direction: column;
     }
     
-    .repo-card {
-      animation: fadeIn 0.5s ease forwards;
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(0, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--primary);
+      animation: spin 1s ease-in-out infinite;
+      margin-bottom: 20px;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Mensaje de error */
+    .error-container {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    
+    .error-icon {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    
+    /* No results message */
+    .no-results {
+      text-align: center;
+      grid-column: 1 / -1;
+      padding: 40px 20px;
       opacity: 0;
+      animation: fadeIn 0.5s ease-out forwards;
     }
     
-    /* Responsive */
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    
+    /* Responsive design */
     @media (max-width: 768px) {
       .repo-grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      }
-      
-      .logo-img {
-        width: 80px;
-        height: 80px;
-      }
-      
-      .logo-gradient {
-        bottom: -50px;
-        padding: 10px;
-      }
-      
-      .banner {
-        height: 200px;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .search-container {
-        margin: 60px auto 30px;
-        padding: 0 15px;
-      }
-      
-      .repo-grid {
-        grid-template-columns: 1fr;
-        padding: 15px;
       }
       
       .logo-img {
@@ -358,24 +413,43 @@
         height: 60px;
       }
       
-      .logo-gradient {
-        bottom: -40px;
-        padding: 8px;
+      .repo-image-container {
+        height: 150px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .repo-grid {
+        grid-template-columns: 1fr;
       }
       
-      .banner {
-        height: 150px;
+      .search-input {
+        padding: 12px 20px;
+        font-size: 1rem;
+      }
+      
+      .search-icon {
+        right: 25px;
+        font-size: 1.1rem;
+      }
+      
+      .repo-buttons {
+        flex-direction: column;
+      }
+      
+      .btn-main {
+        width: 100%;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Banner principal con logo -->
-  <div class="banner">
-    <div class="logo-gradient">
+  <!-- Header minimalista -->
+  <header class="main-header">
+    <div class="logo-container">
       <img src="assets/logo.png" alt="Logo" class="logo-img">
     </div>
-  </div>
+  </header>
 
   <!-- Barra de búsqueda -->
   <div class="search-container">
@@ -383,9 +457,18 @@
     <i class="fas fa-search search-icon"></i>
   </div>
 
-  <div class="container">
-    <h2 class="text-center mb-5" style="font-weight: 800; text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);">✨ Proyectos de Jesús Quijada</h2>
-    <div id="repoList" class="repo-grid"></div>
+  <!-- Contenedor principal -->
+  <div class="main-container">
+    <h2 class="text-center mb-5" style="font-weight: 800; text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);">
+      <i class="fas fa-rocket" style="color: var(--accent);"></i> Proyectos Destacados
+    </h2>
+    
+    <div id="repoList" class="repo-grid">
+      <div class="loading-container">
+        <div class="spinner"></div>
+        <p>Cargando proyectos...</p>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -395,16 +478,18 @@
     let allRepos = [];
 
     // Función para obtener detalles del repo desde details.xml
-    async function getRepoDetails(repo) {
+    async function getRepoDetails(repoName) {
       try {
-        const detailsUrl = `https://raw.githubusercontent.com/JesusQuijada34/${repo}/refs/heads/main/details.xml`;
+        const detailsUrl = `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/refs/heads/main/details.xml`;
         const res = await fetch(detailsUrl);
         
         if (!res.ok) {
           return {
-            name: repo,
+            name: repoName,
             description: 'Descripción no disponible',
-            image: `https://raw.githubusercontent.com/JesusQuijada34/${repo}/main/app/app-icon.ico`
+            rating: '0',
+            hasLive: false,
+            image: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`
           };
         }
         
@@ -412,23 +497,77 @@
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(xmlText, "text/xml");
         
+        // Verificar si existe versión live
+        let hasLive = false;
+        try {
+          const liveRes = await fetch(`https://jesusquijada34.github.io/${repoName}/`);
+          hasLive = liveRes.ok;
+        } catch (e) {
+          hasLive = false;
+        }
+        
         return {
-          name: xmlDoc.querySelector('name')?.textContent?.trim() || repo,
+          repoName,
+          name: xmlDoc.querySelector('name')?.textContent?.trim() || repoName,
           description: xmlDoc.querySelector('description')?.textContent?.trim() || 'Descripción no disponible',
-          image: `https://raw.githubusercontent.com/JesusQuijada34/${repo}/main/app/screenshot.png` || 
-                 `https://raw.githubusercontent.com/JesusQuijada34/${repo}/main/app/app-icon.ico`
+          rating: xmlDoc.querySelector('rate')?.textContent?.trim() || '0',
+          hasLive,
+          image: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/screenshot.png` || 
+                 `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`
         };
-      } catch {
+      } catch (error) {
+        console.error(`Error cargando ${repoName}:`, error);
         return {
-          name: repo,
+          repoName,
+          name: repoName,
           description: 'Descripción no disponible',
-          image: `https://raw.githubusercontent.com/JesusQuijada34/${repo}/main/app/app-icon.ico`
+          rating: '0',
+          hasLive: false,
+          image: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`
         };
       }
     }
 
+    // Función para renderizar estrellas
+    function renderStars(rating) {
+      const num = parseFloat(rating) || 0;
+      const fullStars = Math.floor(num);
+      const hasHalfStar = num % 1 >= 0.5;
+      const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+      
+      let starsHTML = '';
+      
+      // Estrellas llenas
+      for (let i = 0; i < fullStars; i++) {
+        starsHTML += '<i class="fas fa-star"></i>';
+      }
+      
+      // Media estrella
+      if (hasHalfStar) {
+        starsHTML += '<i class="fas fa-star-half-alt"></i>';
+      }
+      
+      // Estrellas vacías
+      for (let i = 0; i < emptyStars; i++) {
+        starsHTML += '<i class="far fa-star"></i>';
+      }
+      
+      return starsHTML;
+    }
+
     // Función para renderizar repos
     function renderRepos(repos) {
+      if (repos.length === 0) {
+        repoListEl.innerHTML = `
+          <div class="no-results">
+            <i class="fas fa-search fa-3x mb-3" style="color: var(--accent);"></i>
+            <h3>No se encontraron proyectos</h3>
+            <p>Intenta con otros términos de búsqueda</p>
+          </div>
+        `;
+        return;
+      }
+      
       repoListEl.innerHTML = '';
       
       repos.forEach((repo, index) => {
@@ -442,27 +581,45 @@
                          `https://raw.githubusercontent.com/JesusQuijada34/${repo.repoName}/main/app/app-icon.ico`;
         
         card.innerHTML = `
-          <img src="${imageUrl}" alt="${repo.name}" class="repo-image" onerror="this.src='https://raw.githubusercontent.com/JesusQuijada34/${repo.repoName}/main/app/app-icon.ico'">
+          <div class="repo-image-container">
+            <img src="${imageUrl}" alt="${repo.name}" class="repo-image" 
+                 onerror="this.src='https://raw.githubusercontent.com/JesusQuijada34/${repo.repoName}/main/app/app-icon.ico'">
+            ${repo.hasLive ? '<div class="live-badge"><i class="fas fa-bolt"></i> LIVE</div>' : ''}
+          </div>
           <div class="repo-content">
             <div class="repo-title">
               <img src="https://raw.githubusercontent.com/JesusQuijada34/${repo.repoName}/main/app/app-icon.ico" 
-                   alt="Icon" class="repo-icon" onerror="this.src='https://via.placeholder.com/40'">
+                   alt="Icon" class="repo-icon" onerror="this.src='https://via.placeholder.com/36'">
               ${repo.name}
             </div>
-            <div class="repo-description">${repo.description}</div>
+            <div class="repo-rating">
+              <div class="stars">${renderStars(repo.rating)}</div>
+              <div class="rating-value">${repo.rating}/5</div>
+            </div>
             <div class="repo-buttons">
-              <button class="btn-download" onclick="event.stopPropagation(); descargarRepo('${repo.repoName}');">
-                <i class="fas fa-download"></i> Descargar
+              ${repo.hasLive ? `
+                <a href="https://jesusquijada34.github.io/${repo.repoName}/" 
+                   class="btn-main btn-live" target="_blank">
+                  <i class="fas fa-external-link-alt btn-icon"></i> Ver Live
+                </a>
+              ` : ''}
+              <button class="btn-main btn-download" onclick="event.stopPropagation(); descargarRepo('${repo.repoName}');">
+                <i class="fas fa-download btn-icon"></i> Descargar
               </button>
-              <a href="https://github.com/JesusQuijada34/${repo.repoName}" class="btn-github" target="_blank">
-                <i class="fab fa-github"></i> GitHub
+              <a href="https://github.com/JesusQuijada34/${repo.repoName}" 
+                 class="btn-main btn-github" target="_blank">
+                <i class="fab fa-github btn-icon"></i> GitHub
               </a>
             </div>
           </div>
         `;
         
         card.addEventListener('click', function() {
-          descargarRepo(repo.repoName);
+          if (repo.hasLive) {
+            window.open(`https://jesusquijada34.github.io/${repo.repoName}/`, '_blank');
+          } else {
+            descargarRepo(repo.repoName);
+          }
         });
         
         repoListEl.appendChild(card);
@@ -474,7 +631,8 @@
       const searchTerm = searchInput.value.toLowerCase();
       const filtered = allRepos.filter(repo => 
         repo.name.toLowerCase().includes(searchTerm) || 
-        repo.description.toLowerCase().includes(searchTerm)
+        repo.description.toLowerCase().includes(searchTerm) ||
+        repo.repoName.toLowerCase().includes(searchTerm)
       );
       renderRepos(filtered);
     }
@@ -483,29 +641,54 @@
     async function loadRepos() {
       try {
         const response = await fetch(rawListURL);
+        if (!response.ok) throw new Error('No se pudo cargar la lista de repositorios');
+        
         const data = await response.text();
         const repos = data.split(',').map(r => r.trim()).filter(r => r.length);
         
-        // Cargar detalles en paralelo
-        const repoDetails = await Promise.all(repos.map(async repoName => {
-          const details = await getRepoDetails(repoName);
-          return { ...details, repoName };
-        }));
+        // Mostrar estado de carga
+        repoListEl.innerHTML = `
+          <div class="loading-container">
+            <div class="spinner"></div>
+            <p>Cargando ${repos.length} proyectos...</p>
+          </div>
+        `;
         
-        allRepos = repoDetails;
+        // Cargar detalles en paralelo con chunks para mejor performance
+        const chunkSize = 5;
+        const repoDetails = [];
+        
+        for (let i = 0; i < repos.length; i += chunkSize) {
+          const chunk = repos.slice(i, i + chunkSize);
+          const details = await Promise.all(chunk.map(getRepoDetails));
+          repoDetails.push(...details);
+          
+          // Actualizar progreso
+          if (repoListEl.querySelector('.loading-container')) {
+            repoListEl.querySelector('.loading-container p').textContent = 
+              `Cargando ${i + chunk.length} de ${repos.length} proyectos...`;
+          }
+        }
+        
+        allRepos = repoDetails.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
         renderRepos(allRepos);
         
         // Configurar búsqueda
         searchInput.addEventListener('input', filterRepos);
       } catch (err) {
+        console.error('Error:', err);
         repoListEl.innerHTML = `
-          <div class="col-12 text-center py-5">
-            <i class="fas fa-exclamation-triangle fa-3x mb-3" style="color: var(--accent);"></i>
-            <h3>No se pudo cargar la lista de repositorios</h3>
+          <div class="error-container">
+            <div class="error-icon">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3>Error al cargar los proyectos</h3>
             <p>${err.message}</p>
+            <button class="btn-main btn-download mt-3" onclick="location.reload()">
+              <i class="fas fa-sync-alt btn-icon"></i> Intentar de nuevo
+            </button>
           </div>
         `;
-        console.error(err);
       }
     }
 
@@ -515,17 +698,27 @@
       window.open(zipUrl, '_blank');
     }
 
-    // Iniciar carga
-    loadRepos();
+    // Iniciar carga cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', loadRepos);
   </script>
 
   <!-- Footer -->
   <footer class="main-footer">
-    <div>
-      <a href="https://github.com/JesusQuijada34" target="_blank">PLATAFORMA</a>
-      <a href="https://t.me/MkelCT" target="_blank">ADMIN</a>
-      <a href="https://t.me/JesusQuijada34" target="_blank">DESARROLLADOR</a>
-      <div class="copyright">&copy; 2025 Jesús Quijada. Todos los derechos reservados.</div>
+    <div class="container">
+      <div class="footer-links">
+        <a href="https://github.com/JesusQuijada34" class="footer-link" target="_blank">
+          <i class="fab fa-github"></i> Plataforma
+        </a>
+        <a href="https://t.me/MkelCT" class="footer-link" target="_blank">
+          <i class="fab fa-telegram"></i> Admin
+        </a>
+        <a href="https://t.me/JesusQuijada34" class="footer-link" target="_blank">
+          <i class="fab fa-telegram"></i> Desarrollador
+        </a>
+      </div>
+      <div class="copyright">
+        &copy; 2025 Jesús Quijada. Todos los derechos reservados.
+      </div>
     </div>
   </footer>
 </body>
