@@ -3,50 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" href="assets/logo.png" type="image/png">
-  <title>Jesús Quijada | Portfolio Interactivo</title>
+  <title>Jesús Quijada | Proyectos</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary-light: #4285f4;
-      --secondary-light: #34a853;
-      --accent-light: #ea4335;
-      --text-primary-light: #202124;
-      --text-secondary-light: #5f6368;
-      --bg-primary-light: #ffffff;
-      --bg-secondary-light: #f8f9fa;
-      --card-bg-light: #ffffff;
-      --border-color-light: #dadce0;
-      --star-color-light: #fbbc04;
-      --neon-light: #4285f4;
-      
-      --primary-dark: #8ab4f8;
-      --secondary-dark: #81c995;
-      --accent-dark: #f28b82;
-      --text-primary-dark: #e8eaed;
-      --text-secondary-dark: #9aa0a6;
-      --bg-primary-dark: #121212;
-      --bg-secondary-dark: #1e1e1e;
-      --card-bg-dark: #2d2e30;
-      --border-color-dark: #3c4043;
-      --star-color-dark: #fbbc04;
-      --neon-dark: #8ab4f8;
+      --primary: #4285f4;
+      --secondary: #34a853;
+      --accent: #ea4335;
+      --text-primary: #202124;
+      --text-secondary: #5f6368;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8f9fa;
+      --card-bg: #ffffff;
+      --border-color: #dadce0;
+      --star-color: #fbbc04;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary: #8ab4f8;
+        --secondary: #81c995;
+        --accent: #f28b82;
+        --text-primary: #e8eaed;
+        --text-secondary: #9aa0a6;
+        --bg-primary: #202124;
+        --bg-secondary: #2d2e30;
+        --card-bg: #2d2e30;
+        --border-color: #3c4043;
+        --star-color: #fbbc04;
+      }
     }
 
     body {
-      --primary: var(--primary-light);
-      --secondary: var(--secondary-light);
-      --accent: var(--accent-light);
-      --text-primary: var(--text-primary-light);
-      --text-secondary: var(--text-secondary-light);
-      --bg-primary: var(--bg-primary-light);
-      --bg-secondary: var(--bg-secondary-light);
-      --card-bg: var(--card-bg-light);
-      --border-color: var(--border-color-light);
-      --star-color: var(--star-color-light);
-      --neon: var(--neon-light);
-      
       background-color: var(--bg-primary);
       color: var(--text-primary);
       font-family: 'Roboto', 'Segoe UI', system-ui, sans-serif;
@@ -55,112 +45,13 @@
       transition: all 0.3s ease;
     }
 
-    @media (prefers-color-scheme: dark) {
-      body {
-        --primary: var(--primary-dark);
-        --secondary: var(--secondary-dark);
-        --accent: var(--accent-dark);
-        --text-primary: var(--text-primary-dark);
-        --text-secondary: var(--text-secondary-dark);
-        --bg-primary: var(--bg-primary-dark);
-        --bg-secondary: var(--bg-secondary-dark);
-        --card-bg: var(--card-bg-dark);
-        --border-color: var(--border-color-dark);
-        --star-color: var(--star-color-dark);
-        --neon: var(--neon-dark);
-      }
-    }
-
-    /* Efectos neón */
-    .neon-effect {
-      position: relative;
-    }
-
-    .neon-effect::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: inherit;
-      box-shadow: 0 0 10px var(--neon), 0 0 20px var(--neon);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    }
-
-    .neon-effect:hover::after {
-      opacity: 0.7;
-    }
-
-    /* Barra de búsqueda dinámica */
-    .search-container {
-      display: flex;
-      justify-content: flex-end;
-      margin: 20px 15px;
-      position: relative;
-    }
-
-    .search-button {
-      background: none;
-      border: none;
-      color: var(--text-primary);
-      font-size: 1.2rem;
-      cursor: pointer;
-      padding: 10px;
-      border-radius: 50%;
-      transition: all 0.3s ease;
-    }
-
-    .search-button:hover {
-      color: var(--primary);
-      transform: scale(1.1);
-    }
-
-    .search-input-container {
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 0;
-      overflow: hidden;
-      transition: width 0.3s ease;
-      background: var(--bg-secondary);
-      border-radius: 25px;
-      display: flex;
-      align-items: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-
-    .search-input-container.active {
-      width: 250px;
-      padding: 0 15px;
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 10px 0;
-      background: transparent;
-      border: none;
-      color: var(--text-primary);
-      outline: none;
-    }
-
-    .search-close {
-      background: none;
-      border: none;
-      color: var(--text-secondary);
-      cursor: pointer;
-      margin-left: 10px;
-    }
-
-    /* Resto del CSS anterior (tarjetas, grid, etc.) */
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 15px;
     }
 
+    /* Header */
     .app-header {
       background-color: var(--bg-primary);
       border-bottom: 1px solid var(--border-color);
@@ -177,6 +68,7 @@
       color: var(--text-primary);
     }
 
+    /* Secciones */
     .section-title {
       font-size: 1.3rem;
       font-weight: 500;
@@ -184,6 +76,7 @@
       color: var(--text-primary);
     }
 
+    /* Grid de tarjetas */
     .apps-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -191,6 +84,13 @@
       margin-bottom: 30px;
     }
 
+    @media (max-width: 600px) {
+      .apps-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+    }
+
+    /* Tarjetas de apps */
     .app-card {
       background-color: var(--card-bg);
       border-radius: 12px;
@@ -199,7 +99,6 @@
       transition: all 0.2s ease;
       cursor: pointer;
       border: 1px solid var(--border-color);
-      position: relative;
     }
 
     .app-card:hover {
@@ -284,57 +183,49 @@
       color: var(--text-secondary);
     }
 
-    .live-badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: var(--secondary);
-      color: black;
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: bold;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-      z-index: 3;
-      animation: pulse 2s infinite;
+    /* Tablas de rankings */
+    .ranking-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
+    .ranking-table th {
+      text-align: left;
+      padding: 12px 0;
+      font-weight: 500;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-color);
     }
 
-    .app-buttons {
+    .ranking-table td {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: middle;
+    }
+
+    .ranking-app {
       display: flex;
-      gap: 8px;
-      margin-top: 10px;
+      align-items: center;
     }
 
-    .app-button {
-      flex: 1;
-      padding: 6px 0;
-      border-radius: 6px;
-      font-size: 0.7rem;
-      text-align: center;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
+    .ranking-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      margin-right: 12px;
+      object-fit: cover;
     }
 
-    .download-button {
-      background: var(--primary);
-      color: white;
+    .ranking-title {
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 4px;
     }
 
-    .live-button {
-      background: var(--secondary);
-      color: black;
-    }
-
-    .app-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    .ranking-category {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
     }
 
     /* Footer */
@@ -366,36 +257,13 @@
     .footer-links a:hover {
       color: var(--primary);
     }
-
-    @media (max-width: 600px) {
-      .apps-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      }
-      
-      .search-input-container.active {
-        width: 200px;
-      }
-    }
   </style>
 </head>
 <body>
   <!-- Header -->
   <header class="app-header">
     <div class="container">
-      <div class="d-flex justify-content-between align-items-center">
-        <h1 class="header-title">Proyectos de Jesús Quijada</h1>
-        <div class="search-container">
-          <div class="search-input-container" id="searchContainer">
-            <input type="text" class="search-input" placeholder="Buscar..." id="searchInput">
-            <button class="search-close" id="searchClose">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-          <button class="search-button neon-effect" id="searchButton">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
+      <h1 class="header-title">Proyectos de Jesús Quijada</h1>
     </div>
   </header>
 
@@ -437,24 +305,7 @@
     const featuredAppsEl = document.getElementById('featuredApps');
     const allAppsEl = document.getElementById('allApps');
     const topAppsEl = document.getElementById('topApps');
-    const searchButton = document.getElementById('searchButton');
-    const searchContainer = document.getElementById('searchContainer');
-    const searchInput = document.getElementById('searchInput');
-    const searchClose = document.getElementById('searchClose');
     let allRepos = [];
-
-    // Toggle de búsqueda
-    searchButton.addEventListener('click', () => {
-      searchContainer.classList.toggle('active');
-      if (searchContainer.classList.contains('active')) {
-        searchInput.focus();
-      }
-    });
-
-    searchClose.addEventListener('click', (e) => {
-      e.stopPropagation();
-      searchContainer.classList.remove('active');
-    });
 
     // Función para verificar si existe splash.png
     async function checkSplashImage(repoName) {
@@ -467,35 +318,18 @@
       }
     }
 
-    // Función para verificar versión live
-    async function checkLiveVersion(repoName) {
-      try {
-        const liveRes = await fetch(`https://jesusquijada34.github.io/${repoName}/`, { method: 'HEAD' });
-        return liveRes.ok;
-      } catch {
-        return false;
-      }
-    }
-
     // Función para obtener detalles del repo
     async function getRepoDetails(repoName) {
       try {
         const detailsUrl = `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/refs/heads/main/details.xml`;
         const res = await fetch(detailsUrl);
         
-        const [splash, hasLive] = await Promise.all([
-          checkSplashImage(repoName),
-          checkLiveVersion(repoName)
-        ]);
-        
         if (!res.ok) {
           return {
             name: repoName,
             category: 'Aplicación',
             rating: '4.0',
-            icon: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`,
-            splash,
-            hasLive
+            icon: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`
           };
         }
         
@@ -504,23 +338,19 @@
         const xmlDoc = parser.parseFromString(xmlText, "text/xml");
         
         return {
-          repoName,
           name: xmlDoc.querySelector('name')?.textContent?.trim() || repoName,
           category: xmlDoc.querySelector('category')?.textContent?.trim() || 'Aplicación',
           rating: xmlDoc.querySelector('rate')?.textContent?.trim() || '4.0',
           icon: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`,
-          splash,
-          hasLive
+          splash: await checkSplashImage(repoName)
         };
       } catch {
         return {
-          repoName,
           name: repoName,
           category: 'Aplicación',
           rating: '4.0',
           icon: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`,
-          splash: null,
-          hasLive: false
+          splash: null
         };
       }
     }
@@ -552,7 +382,7 @@
     // Función para crear tarjeta de app
     function createAppCard(repo) {
       const card = document.createElement('div');
-      card.className = 'app-card neon-effect';
+      card.className = 'app-card';
       
       card.innerHTML = `
         <div class="app-image-container">
@@ -563,7 +393,6 @@
                <i class="fas fa-box"></i>
              </div>`
           }
-          ${repo.hasLive ? '<div class="live-badge"><i class="fas fa-bolt"></i> LIVE</div>' : ''}
         </div>
         <div class="app-content">
           <h3 class="app-title">${repo.name}</h3>
@@ -571,16 +400,6 @@
           <div class="app-rating">
             <div class="stars">${renderStars(repo.rating)}</div>
             <div class="rating-value">${repo.rating}</div>
-          </div>
-          <div class="app-buttons">
-            <button class="app-button download-button" onclick="event.stopPropagation(); downloadRepo('${repo.repoName}')">
-              <i class="fas fa-download"></i> Descargar
-            </button>
-            ${repo.hasLive ? `
-              <button class="app-button live-button" onclick="event.stopPropagation(); window.open('https://jesusquijada34.github.io/${repo.repoName}/', '_blank')">
-                <i class="fas fa-play"></i> Live
-              </button>
-            ` : ''}
           </div>
         </div>
       `;
@@ -627,27 +446,6 @@
       `;
     }
 
-    // Función para descargar repo
-    function downloadRepo(repoName) {
-      const zipUrl = `https://github.com/JesusQuijada34/${repoName}/archive/refs/heads/main.zip`;
-      window.open(zipUrl, '_blank');
-    }
-
-    // Función para filtrar repos
-    function filterRepos() {
-      const searchTerm = searchInput.value.toLowerCase();
-      const filtered = allRepos.filter(repo => 
-        repo.name.toLowerCase().includes(searchTerm) || 
-        repo.category.toLowerCase().includes(searchTerm) ||
-        repo.repoName.toLowerCase().includes(searchTerm)
-      );
-      
-      allAppsEl.innerHTML = '';
-      filtered.forEach(repo => {
-        allAppsEl.appendChild(createAppCard(repo));
-      });
-    }
-
     // Cargar repositorios
     async function loadRepos() {
       try {
@@ -690,9 +488,6 @@
         allRepos.forEach(repo => {
           allAppsEl.appendChild(createAppCard(repo));
         });
-
-        // Configurar búsqueda
-        searchInput.addEventListener('input', filterRepos);
       } catch (err) {
         console.error('Error loading repos:', err);
         featuredAppsEl.innerHTML = '<p>Error al cargar los proyectos</p>';
