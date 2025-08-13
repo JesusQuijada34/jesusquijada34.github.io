@@ -19,6 +19,7 @@
       --card-bg: #ffffff;
       --border-color: #dadce0;
       --star-color: #fbbc04;
+      --neon-glow: 0 0 10px rgba(66, 133, 244, 0.8);
     }
 
     @media (prefers-color-scheme: dark) {
@@ -33,6 +34,7 @@
         --card-bg: #2d2e30;
         --border-color: #3c4043;
         --star-color: #fbbc04;
+        --neon-glow: 0 0 15px rgba(138, 180, 248, 0.8);
       }
     }
 
@@ -61,11 +63,77 @@
       z-index: 100;
     }
 
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
     .header-title {
       font-size: 1.5rem;
       font-weight: 500;
       margin: 0;
       color: var(--text-primary);
+    }
+
+    .search-box {
+      position: relative;
+      flex-grow: 1;
+      max-width: 400px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 8px 15px;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+    }
+
+    /* Loading */
+    .loading-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      gap: 15px;
+    }
+
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(66, 133, 244, 0.2);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .loading-text {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
     /* Secciones */
@@ -99,6 +167,7 @@
       transition: all 0.2s ease;
       cursor: pointer;
       border: 1px solid var(--border-color);
+      position: relative;
     }
 
     .app-card:hover {
@@ -144,6 +213,10 @@
       font-size: 24px;
     }
 
+    .app-icon-fallback i {
+      filter: drop-shadow(var(--neon-glow));
+    }
+
     .app-content {
       padding: 12px;
     }
@@ -183,6 +256,54 @@
       color: var(--text-secondary);
     }
 
+    /* Acciones de hover */
+    .app-actions {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      gap: 10px;
+    }
+
+    .app-card:hover .app-actions {
+      opacity: 1;
+    }
+
+    .action-btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .action-btn:hover {
+      background-color: var(--secondary);
+      transform: scale(1.05);
+    }
+
+    .action-btn.live {
+      background-color: var(--accent);
+    }
+
+    .action-btn.live:hover {
+      background-color: #c53929;
+    }
+
     /* Tablas de rankings */
     .ranking-table {
       width: 100%;
@@ -215,6 +336,7 @@
       border-radius: 8px;
       margin-right: 12px;
       object-fit: cover;
+      box-shadow: var(--neon-glow);
     }
 
     .ranking-title {
@@ -257,35 +379,60 @@
     .footer-links a:hover {
       color: var(--primary);
     }
+
+    /* No results */
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 40px 0;
+      color: var(--text-secondary);
+    }
+
+    /* Neon effect for icons */
+    .neon-icon {
+      filter: drop-shadow(var(--neon-glow));
+      transition: filter 0.3s ease;
+    }
   </style>
 </head>
 <body>
   <!-- Header -->
   <header class="app-header">
-    <div class="container">
+    <div class="container header-content">
       <h1 class="header-title">Proyectos de Jesús Quijada</h1>
+      <div class="search-box">
+        <input type="text" class="search-input" placeholder="Buscar proyectos..." id="searchInput">
+        <i class="fas fa-search search-icon"></i>
+      </div>
     </div>
   </header>
 
   <!-- Contenido principal -->
   <main class="container">
-    <h2 class="section-title">🔮 Recomendados para ti</h2>
-    <div id="featuredApps" class="apps-grid"></div>
+    <div id="loadingContainer" class="loading-container">
+      <div class="loading-spinner"></div>
+      <div class="loading-text" id="loadingText">Cargando proyectos...</div>
+    </div>
 
-    <h2 class="section-title">🏆 Listas de éxitos</h2>
-    <table class="ranking-table">
-      <thead>
-        <tr>
-          <th>Más exitosos (gratuitos)</th>
-          <th>De mayor recaudación</th>
-          <th>Más exitosos (pagados)</th>
-        </tr>
-      </thead>
-      <tbody id="topApps"></tbody>
-    </table>
+    <div id="contentContainer" style="display: none;">
+      <h2 class="section-title">🔮 Recomendados para ti</h2>
+      <div id="featuredApps" class="apps-grid"></div>
 
-    <h2 class="section-title">🎮 Todos los proyectos</h2>
-    <div id="allApps" class="apps-grid"></div>
+      <h2 class="section-title">🏆 Listas de éxitos</h2>
+      <table class="ranking-table">
+        <thead>
+          <tr>
+            <th>Más exitosos (gratuitos)</th>
+            <th>De mayor recaudación</th>
+            <th>Más exitosos (pagados)</th>
+          </tr>
+        </thead>
+        <tbody id="topApps"></tbody>
+      </table>
+
+      <h2 class="section-title">🎮 Todos los proyectos</h2>
+      <div id="allApps" class="apps-grid"></div>
+    </div>
   </main>
 
   <!-- Footer -->
@@ -305,7 +452,12 @@
     const featuredAppsEl = document.getElementById('featuredApps');
     const allAppsEl = document.getElementById('allApps');
     const topAppsEl = document.getElementById('topApps');
+    const loadingContainer = document.getElementById('loadingContainer');
+    const loadingText = document.getElementById('loadingText');
+    const contentContainer = document.getElementById('contentContainer');
+    const searchInput = document.getElementById('searchInput');
     let allRepos = [];
+    let loadedRepos = 0;
 
     // Función para verificar si existe splash.png
     async function checkSplashImage(repoName) {
@@ -318,6 +470,19 @@
       }
     }
 
+    // Función para verificar si existe demo web
+    async function checkLiveDemo(repoName) {
+      try {
+        const demoUrl = `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/live-web.txt`;
+        const res = await fetch(demoUrl);
+        if (!res.ok) return null;
+        const demoText = await res.text();
+        return demoText.trim() || null;
+      } catch {
+        return null;
+      }
+    }
+
     // Función para obtener detalles del repo
     async function getRepoDetails(repoName) {
       try {
@@ -325,11 +490,15 @@
         const res = await fetch(detailsUrl);
         
         if (!res.ok) {
+          loadedRepos++;
+          loadingText.textContent = `Cargando proyectos... (${loadedRepos})`;
           return {
             name: repoName,
             category: 'Aplicación',
             rating: '4.0',
-            icon: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`
+            icon: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`,
+            splash: await checkSplashImage(repoName),
+            liveDemo: await checkLiveDemo(repoName)
           };
         }
         
@@ -337,20 +506,27 @@
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(xmlText, "text/xml");
         
+        loadedRepos++;
+        loadingText.textContent = `Cargando proyectos... (${loadedRepos})`;
+        
         return {
           name: xmlDoc.querySelector('name')?.textContent?.trim() || repoName,
           category: xmlDoc.querySelector('category')?.textContent?.trim() || 'Aplicación',
           rating: xmlDoc.querySelector('rate')?.textContent?.trim() || '4.0',
           icon: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`,
-          splash: await checkSplashImage(repoName)
+          splash: await checkSplashImage(repoName),
+          liveDemo: await checkLiveDemo(repoName)
         };
       } catch {
+        loadedRepos++;
+        loadingText.textContent = `Cargando proyectos... (${loadedRepos})`;
         return {
           name: repoName,
           category: 'Aplicación',
           rating: '4.0',
           icon: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`,
-          splash: null
+          splash: null,
+          liveDemo: null
         };
       }
     }
@@ -390,7 +566,7 @@
             `<img src="${repo.splash}" alt="${repo.name}" class="app-image">` : 
             `<img src="${repo.icon}" alt="${repo.name}" class="app-image-blurred">
              <div class="app-icon-fallback">
-               <i class="fas fa-box"></i>
+               <i class="fas fa-box neon-icon"></i>
              </div>`
           }
         </div>
@@ -401,6 +577,16 @@
             <div class="stars">${renderStars(repo.rating)}</div>
             <div class="rating-value">${repo.rating}</div>
           </div>
+        </div>
+        <div class="app-actions">
+          ${repo.liveDemo ? 
+            `<button class="action-btn live" onclick="event.stopPropagation(); window.open('${repo.liveDemo}', '_blank')">
+              <i class="fas fa-globe"></i> Demo Web
+            </button>` : ''
+          }
+          <button class="action-btn" onclick="event.stopPropagation(); window.open('https://github.com/JesusQuijada34/${repo.repoName}', '_blank')">
+            <i class="fas fa-download"></i> Descargar
+          </button>
         </div>
       `;
       
@@ -433,7 +619,7 @@
     function createRankingApp(repo) {
       return `
         <div class="ranking-app">
-          <img src="${repo.icon}" alt="${repo.name}" class="ranking-icon">
+          <img src="${repo.icon}" alt="${repo.name}" class="ranking-icon neon-icon">
           <div>
             <div class="ranking-title">${repo.name}</div>
             <div class="ranking-category">${repo.category}</div>
@@ -444,6 +630,26 @@
           </div>
         </div>
       `;
+    }
+
+    // Función para filtrar repositorios
+    function filterRepos(searchTerm) {
+      const term = searchTerm.toLowerCase();
+      const filtered = allRepos.filter(repo => 
+        repo.name.toLowerCase().includes(term) || 
+        repo.category.toLowerCase().includes(term)
+      );
+      
+      allAppsEl.innerHTML = '';
+      
+      if (filtered.length === 0) {
+        allAppsEl.innerHTML = '<div class="no-results">No se encontraron proyectos que coincidan con la búsqueda</div>';
+        return;
+      }
+      
+      filtered.forEach(repo => {
+        allAppsEl.appendChild(createAppCard(repo));
+      });
     }
 
     // Cargar repositorios
@@ -462,6 +668,10 @@
         );
         
         allRepos = repoDetails.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
+        
+        // Ocultar loading y mostrar contenido
+        loadingContainer.style.display = 'none';
+        contentContainer.style.display = 'block';
         
         // Mostrar 6 destacados
         const featured = allRepos.slice(0, 6);
@@ -488,9 +698,14 @@
         allRepos.forEach(repo => {
           allAppsEl.appendChild(createAppCard(repo));
         });
+        
+        // Configurar búsqueda
+        searchInput.addEventListener('input', (e) => {
+          filterRepos(e.target.value);
+        });
       } catch (err) {
         console.error('Error loading repos:', err);
-        featuredAppsEl.innerHTML = '<p>Error al cargar los proyectos</p>';
+        loadingText.textContent = 'Error al cargar los proyectos. Intenta recargar la página.';
       }
     }
 
