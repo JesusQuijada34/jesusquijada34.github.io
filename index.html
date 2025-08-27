@@ -14,58 +14,75 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #4285f4;
-      --secondary: #34a853;
-      --accent: #ea4335;
-      --text-primary: #202124;
-      --text-secondary: #5f6368;
-      --bg-primary: #ffffff;
-      --bg-secondary: #f8f9fa;
-      --card-bg: #ffffff;
-      --border-color: #dadce0;
-      --star-color: #fbbc04;
-      --neon-glow: 0 0 10px rgba(66, 133, 244, 0.8);
+      --color-canvas-default: #ffffff;
+      --color-canvas-subtle: #f6f8fa;
+      --color-border-default: #d0d7de;
+      --color-border-muted: #d8dee4;
+      --color-fg-default: #24292f;
+      --color-fg-muted: #57606a;
+      --color-fg-subtle: #6e7781;
+      --color-neutral-muted: rgba(175, 184, 193, 0.2);
+      --color-accent-fg: #0969da;
+      --color-accent-emphasis: #0969da;
+      --color-success-fg: #1a7f37;
+      --color-done-fg: #8250df;
+      --color-attention-fg: #9a6700;
+      --color-btn-bg: #f6f8fa;
+      --color-btn-hover-bg: #f3f4f6;
+      --color-btn-active-bg: #ebecf0;
+      --color-btn-border: rgba(31, 35, 40, 0.15);
+      --color-header-bg: #24292f;
+      --color-header-text: #ffffff;
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --primary: #8ab4f8;
-        --secondary: #81c995;
-        --accent: #f28b82;
-        --text-primary: #e8eaed;
-        --text-secondary: #9aa0a6;
-        --bg-primary: #202124;
-        --bg-secondary: #2d2e30;
-        --card-bg: #2d2e30;
-        --border-color: #3c4043;
-        --star-color: #fbbc04;
-        --neon-glow: 0 0 15px rgba(138, 180, 248, 0.8);
+        --color-canvas-default: #0d1117;
+        --color-canvas-subtle: #161b22;
+        --color-border-default: #30363d;
+        --color-border-muted: #21262d;
+        --color-fg-default: #e6edf3;
+        --color-fg-muted: #7d8590;
+        --color-fg-subtle: #6e7681;
+        --color-neutral-muted: rgba(110, 118, 129, 0.4);
+        --color-accent-fg: #2f81f7;
+        --color-accent-emphasis: #1f6feb;
+        --color-success-fg: #3fb950;
+        --color-done-fg: #a371f7;
+        --color-attention-fg: #d29922;
+        --color-btn-bg: #21262d;
+        --color-btn-hover-bg: #30363d;
+        --color-btn-active-bg: #282e33;
+        --color-btn-border: rgba(240, 246, 252, 0.1);
+        --color-header-bg: #161b22;
+        --color-header-text: #f0f6fc;
       }
     }
 
     body {
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      font-family: 'Roboto', 'Segoe UI', system-ui, sans-serif;
+      background-color: var(--color-canvas-default);
+      color: var(--color-fg-default);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
       margin: 0;
       padding: 0;
-      transition: all 0.3s ease;
+      line-height: 1.5;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 0 auto;
-      padding: 0 15px;
+      padding: 0 16px;
     }
 
     /* Header */
     .app-header {
-      background-color: var(--bg-primary);
-      border-bottom: 1px solid var(--border-color);
-      padding: 15px 0;
+      background-color: var(--color-header-bg);
+      color: var(--color-header-text);
+      padding: 16px 0;
       position: sticky;
       top: 0;
       z-index: 100;
+      border-bottom: 1px solid var(--color-border-default);
     }
 
     .header-content {
@@ -73,14 +90,14 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 16px;
     }
 
     .header-title {
-      font-size: 1.5rem;
-      font-weight: 500;
+      font-size: 20px;
+      font-weight: 600;
       margin: 0;
-      color: var(--text-primary);
+      color: var(--color-header-text);
     }
 
     .search-box {
@@ -91,26 +108,27 @@
 
     .search-input {
       width: 100%;
-      padding: 8px 15px;
-      border-radius: 20px;
-      border: 1px solid var(--border-color);
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      transition: all 0.3s ease;
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid var(--color-border-default);
+      background-color: var(--color-canvas-default);
+      color: var(--color-fg-default);
+      font-size: 14px;
+      transition: all 0.2s ease;
     }
 
     .search-input:focus {
       outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+      border-color: var(--color-accent-fg);
+      box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.3);
     }
 
     .search-icon {
       position: absolute;
-      right: 15px;
+      right: 12px;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--text-secondary);
+      color: var(--color-fg-muted);
     }
 
     /* Loading */
@@ -120,21 +138,21 @@
       align-items: center;
       justify-content: center;
       min-height: 200px;
-      gap: 15px;
+      gap: 16px;
     }
 
     .loading-spinner {
-      width: 50px;
-      height: 50px;
-      border: 4px solid rgba(66, 133, 244, 0.2);
-      border-top-color: var(--primary);
+      width: 48px;
+      height: 48px;
+      border: 3px solid var(--color-border-muted);
+      border-top-color: var(--color-accent-fg);
       border-radius: 50%;
       animation: spin 1s linear infinite;
     }
 
     .loading-text {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
+      color: var(--color-fg-muted);
+      font-size: 14px;
     }
 
     @keyframes spin {
@@ -143,55 +161,82 @@
 
     /* Secciones */
     .section-title {
-      font-size: 1.3rem;
-      font-weight: 500;
-      margin: 25px 0 15px;
-      color: var(--text-primary);
+      font-size: 24px;
+      font-weight: 600;
+      margin: 32px 0 16px;
+      color: var(--color-fg-default);
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--color-border-muted);
     }
 
     /* Grid de tarjetas */
     .apps-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 15px;
-      margin-bottom: 30px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       .apps-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-template-columns: 1fr;
       }
     }
 
-    /* Tarjetas de apps */
+    /* Para Android - mostrar solo iconos */
+    .android-view .apps-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .android-view .app-card {
+      text-align: center;
+    }
+
+    .android-view .app-image-container {
+      height: 100px;
+      width: 100px;
+      margin: 0 auto;
+      border-radius: 20px;
+    }
+
+    .android-view .app-image,
+    .android-view .app-image-blurred {
+      border-radius: 20px;
+    }
+
+    .android-view .app-content {
+      padding: 8px 0;
+    }
+
+    /* Tarjetas de apps - Estilo GitHub */
     .app-card {
-      background-color: var(--card-bg);
-      border-radius: 12px;
+      background-color: var(--color-canvas-default);
+      border: 1px solid var(--color-border-default);
+      border-radius: 6px;
       overflow: hidden;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
       transition: all 0.2s ease;
       cursor: pointer;
-      border: 1px solid var(--border-color);
       position: relative;
     }
 
     .app-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      border-color: var(--color-accent-fg);
+      box-shadow: 0 0 0 1px var(--color-accent-fg);
     }
 
     .app-image-container {
       position: relative;
       width: 100%;
-      height: 100px;
+      height: 160px;
       overflow: hidden;
+      background-color: var(--color-canvas-subtle);
+      border-bottom: 1px solid var(--color-border-default);
     }
 
     .app-image {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.3s ease;
     }
 
     .app-image-blurred {
@@ -207,42 +252,40 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 50px;
-      height: 50px;
-      border-radius: 12px;
-      background-color: rgba(255,255,255,0.2);
-      backdrop-filter: blur(5px);
+      width: 64px;
+      height: 64px;
+      border-radius: 6px;
+      background-color: var(--color-neutral-muted);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
-    }
-
-    .app-icon-fallback i {
-      filter: drop-shadow(var(--neon-glow));
+      font-size: 32px;
+      color: var(--color-fg-muted);
     }
 
     .app-content {
-      padding: 12px;
+      padding: 16px;
     }
 
     .app-title {
-      font-size: 0.95rem;
-      font-weight: 500;
-      margin: 0 0 4px;
-      color: var(--text-primary);
-      white-space: nowrap;
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 0 8px;
+      color: var(--color-accent-fg);
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
       overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     .app-category {
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      margin: 0 0 8px;
-      white-space: nowrap;
+      font-size: 12px;
+      color: var(--color-fg-muted);
+      margin: 0 0 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
       overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     .app-rating {
@@ -251,14 +294,14 @@
     }
 
     .stars {
-      color: var(--star-color);
-      font-size: 0.8rem;
-      margin-right: 5px;
+      color: var(--color-attention-fg);
+      font-size: 12px;
+      margin-right: 8px;
     }
 
     .rating-value {
-      font-size: 0.75rem;
-      color: var(--text-secondary);
+      font-size: 12px;
+      color: var(--color-fg-muted);
     }
 
     /* Acciones de hover */
@@ -268,14 +311,14 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(0,0,0,0.7);
+      background-color: rgba(0,0,0,0.8);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       opacity: 0;
       transition: opacity 0.3s ease;
-      gap: 10px;
+      gap: 12px;
     }
 
     .app-card:hover .app-actions {
@@ -283,51 +326,62 @@
     }
 
     .action-btn {
-      background-color: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 20px;
-      padding: 6px 12px;
-      font-size: 0.8rem;
+      background-color: var(--color-btn-bg);
+      color: var(--color-fg-default);
+      border: 1px solid var(--color-btn-border);
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 12px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 5px;
-      transition: transform 0.2s ease, background-color 0.2s ease;
+      gap: 6px;
+      transition: all 0.2s ease;
     }
 
     .action-btn:hover {
-      background-color: var(--secondary);
-      transform: scale(1.05);
+      background-color: var(--color-btn-hover-bg);
+      border-color: var(--color-border-default);
     }
 
     .action-btn.live {
-      background-color: var(--accent);
+      background-color: var(--color-success-fg);
+      color: white;
+      border-color: rgba(0,0,0,0.15);
     }
 
     .action-btn.live:hover {
-      background-color: #c53929;
+      background-color: #2ea44f;
     }
 
     /* Tablas de rankings */
     .ranking-table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 30px;
+      margin-bottom: 32px;
+      border: 1px solid var(--color-border-default);
+      border-radius: 6px;
+      overflow: hidden;
     }
 
     .ranking-table th {
       text-align: left;
-      padding: 12px 0;
-      font-weight: 500;
-      color: var(--text-primary);
-      border-bottom: 1px solid var(--border-color);
+      padding: 16px;
+      font-weight: 600;
+      color: var(--color-fg-default);
+      background-color: var(--color-canvas-subtle);
+      border-bottom: 1px solid var(--color-border-default);
     }
 
     .ranking-table td {
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border-color);
+      padding: 16px;
+      border-bottom: 1px solid var(--color-border-default);
       vertical-align: middle;
+      background-color: var(--color-canvas-default);
+    }
+
+    .ranking-table tr:last-child td {
+      border-bottom: none;
     }
 
     .ranking-app {
@@ -338,29 +392,30 @@
     .ranking-icon {
       width: 40px;
       height: 40px;
-      border-radius: 8px;
+      border-radius: 6px;
       margin-right: 12px;
       object-fit: cover;
-      box-shadow: var(--neon-glow);
+      border: 1px solid var(--color-border-default);
     }
 
     .ranking-title {
-      font-weight: 500;
-      color: var(--text-primary);
+      font-weight: 600;
+      color: var(--color-accent-fg);
       margin-bottom: 4px;
+      font-size: 14px;
     }
 
     .ranking-category {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
+      font-size: 12px;
+      color: var(--color-fg-muted);
     }
 
     /* Footer */
     .app-footer {
-      background-color: var(--bg-secondary);
-      padding: 20px 0;
-      margin-top: 40px;
-      border-top: 1px solid var(--border-color);
+      background-color: var(--color-canvas-subtle);
+      padding: 24px 0;
+      margin-top: 48px;
+      border-top: 1px solid var(--color-border-default);
     }
 
     .footer-content {
@@ -370,33 +425,156 @@
     }
 
     .copyright {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
+      font-size: 12px;
+      color: var(--color-fg-muted);
     }
 
     .footer-links a {
-      color: var(--text-secondary);
+      color: var(--color-fg-muted);
       text-decoration: none;
-      margin-left: 15px;
-      font-size: 0.8rem;
+      margin-left: 16px;
+      font-size: 12px;
     }
 
     .footer-links a:hover {
-      color: var(--primary);
+      color: var(--color-accent-fg);
+      text-decoration: underline;
     }
 
     /* No results */
     .no-results {
       grid-column: 1 / -1;
       text-align: center;
-      padding: 40px 0;
-      color: var(--text-secondary);
+      padding: 48px 0;
+      color: var(--color-fg-muted);
+      font-size: 14px;
     }
 
-    /* Neon effect for icons */
-    .neon-icon {
-      filter: drop-shadow(var(--neon-glow));
-      transition: filter 0.3s ease;
+    /* Anuncio de cumpleaños */
+    .birthday-announcement {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #ff8a00, #e52e71);
+      color: white;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      max-width: 380px;
+      animation: pulse 2s infinite;
+    }
+
+    .birthday-gift {
+      width: 50px;
+      height: 50px;
+      flex-shrink: 0;
+    }
+
+    .countdown-text {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .countdown-timer {
+      font-size: 18px;
+      font-weight: 700;
+      font-family: monospace;
+      letter-spacing: 1px;
+    }
+
+    .close-announcement {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 18px;
+      margin-left: 10px;
+    }
+
+    /* Animaciones para celebración */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes celebrate {
+      0% { transform: translateY(0); }
+      25% { transform: translateY(-20px); }
+      50% { transform: translateY(0); }
+      75% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    .celebrate-animation {
+      animation: celebrate 1s ease-in-out;
+    }
+
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: #f0f;
+      opacity: 0.7;
+      z-index: 10000;
+      animation: confetti-fall 5s linear forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* GitHub style badges */
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1;
+      border-radius: 2em;
+      background-color: var(--color-neutral-muted);
+      color: var(--color-fg-default);
+      margin-left: 8px;
+    }
+
+    /* GitHub style button */
+    .btn {
+      display: inline-block;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      user-select: none;
+      border: 1px solid;
+      border-radius: 6px;
+      appearance: none;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background-color: var(--color-success-fg);
+      border-color: rgba(27, 31, 36, 0.15);
+    }
+
+    .btn-primary:hover {
+      background-color: #2ea44f;
     }
   </style>
 </head>
@@ -452,6 +630,16 @@
     </div>
   </footer>
 
+  <!-- Anuncio de cumpleaños -->
+  <div id="birthdayAnnouncement" class="birthday-announcement" style="display: none;">
+    <img src="assets/gift.png" alt="Regalo" class="birthday-gift">
+    <div>
+      <div class="countdown-text" id="countdownText">Faltan <span id="countdownTimer">00:00:00:00</span> para que el desarrollador cumpla <span id="developerAge">16</span> años</div>
+      <div class="countdown-timer" id="countdownDetailed">00d 00h 00m 00s 000ms</div>
+    </div>
+    <button class="close-announcement" id="closeAnnouncement">&times;</button>
+  </div>
+
   <script>
     const rawListURL = "https://raw.githubusercontent.com/JesusQuijada34/catalog/refs/heads/main/repo.list";
     const featuredAppsEl = document.getElementById('featuredApps');
@@ -461,8 +649,62 @@
     const loadingText = document.getElementById('loadingText');
     const contentContainer = document.getElementById('contentContainer');
     const searchInput = document.getElementById('searchInput');
+    const birthdayAnnouncement = document.getElementById('birthdayAnnouncement');
+    const countdownTimer = document.getElementById('countdownTimer');
+    const countdownDetailed = document.getElementById('countdownDetailed');
+    const developerAge = document.getElementById('developerAge');
+    const closeAnnouncement = document.getElementById('closeAnnouncement');
+    const countdownText = document.getElementById('countdownText');
+
     let allRepos = [];
     let loadedRepos = 0;
+    let countdownInterval;
+    let isAndroid = /Android/i.test(navigator.userAgent);
+    const birthday = new Date(2009, 8, 1); // 1 de septiembre de 2009
+    const celebrationEnd = new Date(2009, 8, 4); // 3 de septiembre de 2009 (fin de celebración)
+    const now = new Date();
+
+    // Detectar si es un dispositivo Android y aplicar clase específica
+    if (isAndroid) {
+      document.body.classList.add('android-view');
+    }
+
+    // Función para calcular la edad actual del desarrollador
+    function calculateCurrentAge() {
+      const today = new Date();
+      let age = today.getFullYear() - birthday.getFullYear();
+      const monthDiff = today.getMonth() - birthday.getMonth();
+
+      // Ajustar si aún no ha pasado el cumpleaños este año
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
+        age--;
+      }
+
+      return age;
+    }
+
+    // Mostrar la edad actual en la interfaz
+    function displayCurrentAge() {
+      const age = calculateCurrentAge();
+      const ageDisplay = document.createElement('div');
+      ageDisplay.style.marginTop = '10px';
+      ageDisplay.style.fontSize = '14px';
+      ageDisplay.style.color = 'var(--color-fg-muted)';
+      ageDisplay.innerHTML = `Desarrollador: <strong>${age} años</strong> (nacido el 01/09/2009)`;
+
+      // Insertar después del título principal
+      const headerTitle = document.querySelector('.header-title');
+      headerTitle.parentNode.insertBefore(ageDisplay, headerTitle.nextSibling);
+    }
+
+    // Verificar si ya se mostró la celebración
+    function hasCelebrationBeenShown() {
+      return localStorage.getItem('celebrationShown') === 'true';
+    }
+
+    function setCelebrationShown() {
+      localStorage.setItem('celebrationShown', 'true');
+    }
 
     // Función para verificar si existe splash.png
     async function checkSplashImage(repoName) {
@@ -475,14 +717,17 @@
       }
     }
 
-    // Función para verificar si existe demo web
-    async function checkLiveDemo(repoName) {
+    // Función mejorada para verificar si existe demo web en jesusquijada34.github.io
+    async function checkGithubIoDemo(repoName) {
       try {
-        const demoUrl = `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/live-web.txt`;
-        const res = await fetch(demoUrl);
-        if (!res.ok) return null;
-        const demoText = await res.text();
-        return demoText.trim() || null;
+        const demoUrl = `https://jesusquijada34.github.io/${repoName}`;
+        const res = await fetch(demoUrl, { method: 'HEAD' });
+
+        // Si la respuesta es exitosa (200-299) o redirección (300-399)
+        if (res.ok || res.status === 301 || res.status === 302) {
+          return demoUrl;
+        }
+        return null;
       } catch {
         return null;
       }
@@ -493,45 +738,56 @@
       try {
         const detailsUrl = `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/refs/heads/main/details.xml`;
         const res = await fetch(detailsUrl);
-        
+
         if (!res.ok) {
           loadedRepos++;
           loadingText.textContent = `Cargando proyectos... (${loadedRepos})`;
+
+          // Verificar si existe demo web
+          const liveDemo = await checkGithubIoDemo(repoName);
+
           return {
             name: repoName,
             category: 'Aplicación',
             rating: '4.0',
             icon: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`,
             splash: await checkSplashImage(repoName),
-            liveDemo: await checkLiveDemo(repoName)
+            liveDemo: liveDemo
           };
         }
-        
+
         const xmlText = await res.text();
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(xmlText, "text/xml");
-        
+
         loadedRepos++;
         loadingText.textContent = `Cargando proyectos... (${loadedRepos})`;
-        
+
+        // Verificar si existe demo web
+        const liveDemo = await checkGithubIoDemo(repoName);
+
         return {
           name: xmlDoc.querySelector('name')?.textContent?.trim() || repoName,
           category: xmlDoc.querySelector('category')?.textContent?.trim() || 'Aplicación',
           rating: xmlDoc.querySelector('rate')?.textContent?.trim() || '4.0',
           icon: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`,
           splash: await checkSplashImage(repoName),
-          liveDemo: await checkLiveDemo(repoName)
+          liveDemo: liveDemo
         };
       } catch {
         loadedRepos++;
         loadingText.textContent = `Cargando proyectos... (${loadedRepos})`;
+
+        // Verificar si existe demo web
+        const liveDemo = await checkGithubIoDemo(repoName);
+
         return {
           name: repoName,
           category: 'Aplicación',
           rating: '4.0',
           icon: `https://raw.githubusercontent.com/JesusQuijada34/${repoName}/main/app/app-icon.ico`,
           splash: null,
-          liveDemo: null
+          liveDemo: liveDemo
         };
       }
     }
@@ -542,21 +798,21 @@
       const fullStars = Math.floor(num);
       const hasHalfStar = num % 1 >= 0.5;
       const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-      
+
       let starsHTML = '';
-      
+
       for (let i = 0; i < fullStars; i++) {
         starsHTML += '<i class="fas fa-star"></i>';
       }
-      
+
       if (hasHalfStar) {
         starsHTML += '<i class="fas fa-star-half-alt"></i>';
       }
-      
+
       for (let i = 0; i < emptyStars; i++) {
         starsHTML += '<i class="far fa-star"></i>';
       }
-      
+
       return starsHTML;
     }
 
@@ -564,15 +820,18 @@
     function createAppCard(repo) {
       const card = document.createElement('div');
       card.className = 'app-card';
-      
+
+      // En Android, mostrar solo el icono en lugar del splash
+      const showSplash = !isAndroid && repo.splash;
+
       card.innerHTML = `
         <div class="app-image-container">
-          ${repo.splash ? 
-            `<img src="${repo.splash}" alt="${repo.name}" class="app-image">` : 
-            `<img src="${repo.icon}" alt="${repo.name}" class="app-image-blurred">
-             <div class="app-icon-fallback">
-               <i class="fas fa-box neon-icon"></i>
-             </div>`
+          ${showSplash ?
+            `<img src="${repo.splash}" alt="${repo.name}" class="app-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` :
+            `<img src="${repo.icon}" alt="${repo.name}" class="${showSplash ? 'app-image-blurred' : 'app-image'}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+             ${showSplash ? `<div class="app-icon-fallback" style="display: none;">
+               <i class="fas fa-box"></i>
+             </div>` : ''}`
           }
         </div>
         <div class="app-content">
@@ -584,9 +843,9 @@
           </div>
         </div>
         <div class="app-actions">
-          ${repo.liveDemo ? 
+          ${repo.liveDemo ?
             `<button class="action-btn live" onclick="event.stopPropagation(); window.open('${repo.liveDemo}', '_blank')">
-              <i class="fas fa-globe"></i> Demo Web
+              <i class="fas fa-globe"></i> Vista Previa
             </button>` : ''
           }
           <button class="action-btn" onclick="event.stopPropagation(); window.open('https://github.com/JesusQuijada34/${repo.repoName}', '_blank')">
@@ -594,18 +853,18 @@
           </button>
         </div>
       `;
-      
+
       card.addEventListener('click', () => {
         window.open(`https://github.com/JesusQuijada34/${repo.repoName}`, '_blank');
       });
-      
+
       return card;
     }
 
     // Función para crear fila de ranking
     function createRankingRow(repos) {
       const row = document.createElement('tr');
-      
+
       row.innerHTML = `
         <td>
           ${repos[0] ? createRankingApp(repos[0]) : ''}
@@ -617,14 +876,14 @@
           ${repos[2] ? createRankingApp(repos[2]) : ''}
         </td>
       `;
-      
+
       return row;
     }
 
     function createRankingApp(repo) {
       return `
         <div class="ranking-app">
-          <img src="${repo.icon}" alt="${repo.name}" class="ranking-icon neon-icon">
+          <img src="${repo.icon}" alt="${repo.name}" class="ranking-icon" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzZFNzY4MSI+PHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0xOCA0SDZjLTEuMSAwLTIgLjktMiAydjEyYzAgMS4xLjkgMiAyIDJoMTJjMS4xIDAgMi0uOSAyLTJWNmMwLTEuMS0uOS0yLTItMnptMCAxNEg2VjZoMTJ2MTJ6Ii8+PC9zdmc+';">
           <div>
             <div class="ranking-title">${repo.name}</div>
             <div class="ranking-category">${repo.category}</div>
@@ -640,20 +899,124 @@
     // Función para filtrar repositorios
     function filterRepos(searchTerm) {
       const term = searchTerm.toLowerCase();
-      const filtered = allRepos.filter(repo => 
-        repo.name.toLowerCase().includes(term) || 
+      const filtered = allRepos.filter(repo =>
+        repo.name.toLowerCase().includes(term) ||
         repo.category.toLowerCase().includes(term)
       );
-      
+
       allAppsEl.innerHTML = '';
-      
+
       if (filtered.length === 0) {
         allAppsEl.innerHTML = '<div class="no-results">No se encontraron proyectos que coincidan con la búsqueda</div>';
         return;
       }
-      
+
       filtered.forEach(repo => {
         allAppsEl.appendChild(createAppCard(repo));
+      });
+    }
+
+    // Función para calcular la edad futura (para la cuenta regresiva)
+    function calculateFutureAge(birthday) {
+      const today = new Date();
+      let age = today.getFullYear() - birthday.getFullYear();
+      const monthDiff = today.getMonth() - birthday.getMonth();
+
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
+        // Si aún no ha cumplido años este año, la edad futura es la misma que la actual
+        return age;
+      } else {
+        // Si ya cumplió años este año, la edad futura es la actual + 1
+        return age + 1;
+      }
+    }
+
+    // Función para actualizar la cuenta regresiva
+    function updateCountdown() {
+      const now = new Date();
+      let targetDate = new Date(now.getFullYear(), 8, 1); // 1 de septiembre de este año
+
+      // Si ya pasó el 1 de septiembre de este año, calcular para el próximo año
+      if (now > targetDate) {
+        targetDate.setFullYear(targetDate.getFullYear() + 1);
+      }
+
+      const timeRemaining = targetDate - now;
+
+      if (timeRemaining <= 0) {
+        clearInterval(countdownInterval);
+        birthdayAnnouncement.style.display = 'none';
+
+        // Si estamos en el período de celebración y el usuario es nuevo
+        if (now <= celebrationEnd && !hasCelebrationBeenShown()) {
+          startCelebration();
+        }
+        return;
+      }
+
+      // Calcular días, horas, minutos, segundos y milisegundos
+      const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+      const milliseconds = Math.floor(timeRemaining % 1000);
+
+      // Formatear para mostrar
+      countdownTimer.textContent = `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      countdownDetailed.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s ${milliseconds}ms`;
+
+      // Actualizar la edad que cumplirá
+      const nextAge = calculateFutureAge(birthday);
+      developerAge.textContent = nextAge;
+    }
+
+    // Función para iniciar la celebración
+    function startCelebration() {
+      // Mostrar animación de celebración
+      document.body.classList.add('celebrate-animation');
+
+      // Crear efecto de confeti
+      createConfetti();
+
+      // Redirigir después de 5 segundos
+      setTimeout(() => {
+        window.location.href = 'https://t.me/jesusquijada34';
+      }, 5000);
+
+      // Marcar que ya se mostró la celebración
+      setCelebrationShown();
+    }
+
+    // Función para crear confeti
+    function createConfetti() {
+      const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.width = (5 + Math.random() * 10) + 'px';
+        confetti.style.height = (5 + Math.random() * 10) + 'px';
+        confetti.style.animationDelay = Math.random() * 5 + 's';
+        document.body.appendChild(confetti);
+      }
+    }
+
+    // Inicializar el anuncio de cumpleaños
+    function initBirthdayAnnouncement() {
+      // Solo mostrar si estamos en agosto o septiembre
+      const currentMonth = now.getMonth(); // 0-11 (0=enero, 8=septiembre)
+
+      if (currentMonth === 7 || currentMonth === 8) { // Agosto (7) o Septiembre (8)
+        birthdayAnnouncement.style.display = 'flex';
+        updateCountdown();
+        countdownInterval = setInterval(updateCountdown, 10); // Actualizar cada 10ms para los milisegundos
+      }
+
+      // Configurar el botón de cerrar
+      closeAnnouncement.addEventListener('click', () => {
+        birthdayAnnouncement.style.display = 'none';
       });
     }
 
@@ -663,7 +1026,7 @@
         const response = await fetch(rawListURL);
         const data = await response.text();
         const repos = data.split(',').map(r => r.trim()).filter(r => r.length);
-        
+
         // Cargar detalles en paralelo
         const repoDetails = await Promise.all(
           repos.map(async repoName => {
@@ -671,39 +1034,42 @@
             return { ...details, repoName };
           })
         );
-        
+
         allRepos = repoDetails.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
-        
+
         // Ocultar loading y mostrar contenido
         loadingContainer.style.display = 'none';
         contentContainer.style.display = 'block';
-        
+
         // Mostrar 6 destacados
         const featured = allRepos.slice(0, 6);
         featured.forEach(repo => {
           featuredAppsEl.appendChild(createAppCard(repo));
         });
-        
+
         // Mostrar top 3 para la tabla
         const topFree = [allRepos[0], allRepos[3], allRepos[5]];
         const topGrossing = [allRepos[1], allRepos[4], allRepos[7]];
         const topPaid = [allRepos[2], allRepos[6], allRepos[8]];
-        
+
         // Crear filas para la tabla
         for (let i = 0; i < 3; i++) {
           const row = createRankingRow([
-            topFree[i], 
-            topGrossing[i], 
+            topFree[i],
+            topGrossing[i],
             topPaid[i]
           ]);
           topAppsEl.appendChild(row);
         }
-        
+
         // Mostrar todos los proyectos
         allRepos.forEach(repo => {
           allAppsEl.appendChild(createAppCard(repo));
         });
-        
+
+        // Mostrar la edad actual del desarrollador
+        displayCurrentAge();
+
         // Configurar búsqueda
         searchInput.addEventListener('input', (e) => {
           filterRepos(e.target.value);
@@ -715,7 +1081,10 @@
     }
 
     // Iniciar carga
-    document.addEventListener('DOMContentLoaded', loadRepos);
-  </script>
+    document.addEventListener('DOMContentLoaded', () => {
+      loadRepos();
+      initBirthdayAnnouncement();
+    });
+</script>
 </body>
 </html>
